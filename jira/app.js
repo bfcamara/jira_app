@@ -104,7 +104,7 @@
                         '    </soapenc:Array>' +
                         '  </soap:Body>' +
                         '</soap:Envelope>',
-      GET_ASSIGNEES:    '<?xml version="1.0" encoding="utf-8"?>' +
+      GET_ASSIGNEES:    'body=<?xml version="1.0" encoding="utf-8"?>' +
                         '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"' +
                         '    xmlns:tns="%@1" xmlns:types="%@1/encodedTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
                         '  <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">' +
@@ -171,7 +171,7 @@
                     '<div class="field">' +
                     '  <p class="title">{{I18n.form.assignee}}<p>' +
                     '  <p><select name="assignee_id">' +
-                    '    {{#assignees}}<option value="{{id}}">{{name}}</option>{{/assignees}}' +
+                    '    {{#assignees}}<option value="{{name}}">{{fullname}}</option>{{/assignees}}' +
                     '  </select></p>' +
                     '</div>' +
                     '<p class="input"><input disabled="disabled" type="submit" value="{{I18n.global.submit}}" class="submit" onclick="return false"/></p>' +
@@ -269,7 +269,7 @@
 
       // Avoid testing result from request, as it's not working for some JIRA configurations and there is an option to 'Allow unassigned issues' in JIRA
 
-      results = this._extractInfo(assignees, ['id', 'name']);
+      results = this._extractInfo(assignees, ['fullname', 'name']);
 
       this.sheet('submitForm')
           .render('formData', { assignees: this._sortArrayByName(results), issueTypes: this._sortArrayByName(this.issueTypes), projects: this._sortArrayByName(this.projects) })
@@ -421,7 +421,7 @@
     },
 
     _xmlTemplateGetAssignees: function(projectKey) {
-      return encodeURI( this.xmlTemplates.GET_ISSUE_TYPES.fmt(this.resources.AGILOSOAPSERVICE_URI.fmt(this.config.url), this.sessionID, projectKey, this.config.url) );
+      return encodeURI( this.xmlTemplates.GET_ASSIGNEES.fmt(this.resources.AGILOSOAPSERVICE_URI.fmt(this.config.url), this.sessionID, projectKey, this.config.url) );
     },
 
     _xmlTemplateGetIssueTypes: function(projectID) {
