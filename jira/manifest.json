@@ -1,3 +1,7 @@
 {
-  "name": "JIRA"
+  "name": "JIRA",
+
+  "configuration": {
+
+  }
 }
