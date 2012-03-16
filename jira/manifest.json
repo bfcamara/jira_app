@@ -1,7 +1,25 @@
 {
-  "name": "JIRA",
+  "name": "Jira",
 
   "configuration": {
+    "customFieldID": {
+      "type": "text",
+      "required": "true"
+    },
 
+    "password": {
+      "type": "password",
+      "required": "true"
+    },
+
+    "username": {
+      "type": "text",
+      "required": "true"
+    },
+
+    "url": {
+      "type": "url",
+      "required": "true"
+    }
   }
 }
