@@ -189,7 +189,7 @@
       'addTag':           function(data, url) { return this._postJsonRequest(data, url); },
       'createIssue':      function(data) { return this._soapRequest(data); },
       'externalLinks':    function(ticketID) { return { url: this.resources.LINKS_URI.fmt(ticketID) }; },
-      'getAssignees':     function(data) { return this._soapRequest(data, this.resources.AGILOSOAPSERVICE_URI.fmt(this.config.url)); },
+      'getAssignees':     function(data) { return this._soapRequest(data, this.resources.AGILOSOAPSERVICE_URI.fmt(this.settings.url)); },
       'getIssueTypes':    function(data) { return this._soapRequest(data); },
       'getProjects':      function(data) { return this._soapRequest(data); },
       'getSession':       function(data) { return this._soapRequest(data); },
@@ -376,7 +376,7 @@
 
     _renderIssue: function(issue) {
       var issueID =   issue.external_link.issue_id,
-          issueURL =  this.resources.ISSUE_URI.fmt(this.config.url, issueID);
+          issueURL =  this.resources.ISSUE_URI.fmt(this.settings.url, issueID);
 
       this.sheet('issue')
           .render('issueData', { issueID: issueID, url: issueURL })
@@ -384,7 +384,7 @@
     },
 
     _soapRequest: function(data, url) {
-      url = url || this.resources.JIRASOAPSERVICE_URI.fmt(this.config.url);
+      url = url || this.resources.JIRASOAPSERVICE_URI.fmt(this.settings.url);
       return {
         data:         data,
         dataType:     'xml',
@@ -407,33 +407,33 @@
     _xmlTemplateCreateIssue: function(options) {
       return encodeURI( 
         this.xmlTemplates.CREATE_ISSUE.fmt(
-          this.resources.JIRASOAPSERVICE_URI.fmt(this.config.url),
+          this.resources.JIRASOAPSERVICE_URI.fmt(this.settings.url),
           this.sessionID,
           options.assigneeID,
           this.deps.currentTicketDescription,
           options.projectKey,
           this.deps.currentTicketSubject,
           options.issueTypeID,
-          this.config.customFieldID,
+          this.settings.customFieldID,
           this.currentTicketID
         )
       );
     },
 
     _xmlTemplateGetAssignees: function(projectKey) {
-      return encodeURI( this.xmlTemplates.GET_ASSIGNEES.fmt(this.resources.AGILOSOAPSERVICE_URI.fmt(this.config.url), this.sessionID, projectKey, this.config.url) );
+      return encodeURI( this.xmlTemplates.GET_ASSIGNEES.fmt(this.resources.AGILOSOAPSERVICE_URI.fmt(this.settings.url), this.sessionID, projectKey, this.settings.url) );
     },
 
     _xmlTemplateGetIssueTypes: function(projectID) {
-      return encodeURI( this.xmlTemplates.GET_ISSUE_TYPES.fmt(this.resources.JIRASOAPSERVICE_URI.fmt(this.config.url), this.sessionID, projectID) );
+      return encodeURI( this.xmlTemplates.GET_ISSUE_TYPES.fmt(this.resources.JIRASOAPSERVICE_URI.fmt(this.settings.url), this.sessionID, projectID) );
     },
 
     _xmlTemplateGetProjects: function() {
-      return encodeURI( this.xmlTemplates.GET_PROJECTS.fmt(this.resources.JIRASOAPSERVICE_URI.fmt(this.config.url), this.sessionID) );
+      return encodeURI( this.xmlTemplates.GET_PROJECTS.fmt(this.resources.JIRASOAPSERVICE_URI.fmt(this.settings.url), this.sessionID) );
     },
 
     _xmlTemplateGetSession: function() {
-      return encodeURI( this.xmlTemplates.GET_SESSION.fmt(this.resources.JIRASOAPSERVICE_URI.fmt(this.config.url), this.config.username, this.config.password) );
+      return encodeURI( this.xmlTemplates.GET_SESSION.fmt(this.resources.JIRASOAPSERVICE_URI.fmt(this.settings.url), this.settings.username, this.settings.password) );
     },
 
     /** Helpers **/
