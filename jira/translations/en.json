@@ -1,3 +1,10 @@
 {
-  "description": "Shows related information from a linked JIRA ticket."
+  "description": "Shows related information from a linked JIRA ticket.",
+
+  "configuration": {
+    "customFieldID": { "label": "Custom Field ID" },
+    "password":      { "label": "Password" },
+    "username":      { "label": "Username" },
+    "url":           { "label": "URL" }
+  }
 }
