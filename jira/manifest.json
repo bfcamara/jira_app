@@ -1,5 +1,6 @@
 {
   "name": "Jira",
+  "private": true,
 
   "configuration": {
     "customFieldID": {
