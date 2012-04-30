@@ -244,7 +244,7 @@
 
     handleCreateIssueResult: function(e, data) {
       if (this.exceptionOccurred(data)) return;
-      var issueID = $(data).find('multiRef').children('key').text(), requestData, url;
+      var issueID = this.$(data).find('multiRef').children('key').text(), requestData, url;
 
       requestData =  { "external_link": { "type": "JiraIssue", "issue_id": issueID } };
       url =   this.resources.LINKS_URI.fmt(this.deps.currentTicketID);
