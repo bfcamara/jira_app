@@ -2,7 +2,6 @@
 
   return ZendeskApps.defineApp(ZendeskApps.Site.TICKET_PROPERTIES, {
     appID: '/apps/01-jira/versions/1.0.0',
-    name: 'Jira',
 
     defaultSheet: 'loading',
 
@@ -24,35 +23,6 @@
       LINKS_URI:            "/tickets/%@/external_links.json",
       PROXY_URI:            "/proxy/direct?log=1&url=%@",
       TICKET_URI:           "/tickets/%@.json?_method=put"
-    },
-
-    translations: {
-      exception: "An error occured: %@",
-
-      form: {
-        assignee:     "Assignee",
-        info:         "Submit this ticket as a new issue",
-        issue_type:   "Type",
-        project:      "Project",
-        success:      "JIRA issue created!"
-      },
-
-      global: {
-        back:       "Back",
-        submit:     "Submit",
-        submitting: "Submitting..."
-      },
-
-      issue: {
-        notice: "This ticket is related to the following issue in JIRA"
-      },
-
-      login: {
-        failed:   "Login failed",
-        success:  "Successfully logged in! Loading projects..."
-      },
-
-      problem: "There's been a problem: {{error}}"
     },
 
     xmlTemplates: {
@@ -145,7 +115,7 @@
 
     templates: {
       main:         '<div class="jira_app">' +
-                    '  <div><h3>JIRA <span class="loader" style="display: none;"></span></h3></div><hr/>' +
+                    '  <div><h3>{{I18n.app.name}} <span class="loader" style="display: none;"></span></h3></div><hr/>' +
                     '  <section data-sheet-name="loading" class="loading"></section>' +
                     '  <section data-sheet-name="issue" class="issue"></section>' +
                     '  <section data-sheet-name="message" class="message"></section>' +
