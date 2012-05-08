@@ -1,5 +1,5 @@
 {
-  "name": "Jira",
+  "default_locale": "en",
   "private": true,
 
   "configuration": {

@@ -2,7 +2,6 @@
   "app": {
     "configuration": {
       "customFieldID":  { "label": "Custom Field ID" },
-      "name":           { "label": "Name" },
       "password":       { "label": "Password" },
       "username":       { "label": "Username" },
       "url":            { "label": "URL" }
