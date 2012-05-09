@@ -7,7 +7,7 @@
       "url":            { "label": "URL" }
     },
 
-    "description":  "Shows related information from a linked JIRA ticket.",
+    "description":  "Shows related information from a linked JIRA ticket",
     "name":         "Jira"
   },
 
