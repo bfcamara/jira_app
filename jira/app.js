@@ -21,12 +21,11 @@
       ISSUE_URI:            "%@/browse/%@",
       JIRASOAPSERVICE_URI:  "%@/rpc/soap/jirasoapservice-v2",
       LINKS_URI:            "/tickets/%@/external_links.json",
-      PROXY_URI:            "/proxy/direct?log=1&url=%@",
       TICKET_URI:           "/tickets/%@.json?_method=put"
     },
 
     xmlTemplates: {
-      CREATE_ISSUE:     'body=<?xml version="1.0" encoding="ISO-8859-1"?>' +
+      CREATE_ISSUE:     '<?xml version="1.0" encoding="ISO-8859-1"?>' +
                         '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"' +
                         '    xmlns:tns="%@1" xmlns:types="%@1/encodedTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
                         '  <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">' +
@@ -71,7 +70,7 @@
                         '    </soapenc:Array>' +
                         '  </soap:Body>' +
                         '</soap:Envelope>',
-      GET_ASSIGNEES:    'body=<?xml version="1.0" encoding="utf-8"?>' +
+      GET_ASSIGNEES:    '<?xml version="1.0" encoding="utf-8"?>' +
                         '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"' +
                         '    xmlns:tns="%@1" xmlns:types="%@1/encodedTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
                         '  <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">' +
@@ -81,7 +80,7 @@
                         '    </q1:getAssignableUsers>' +
                         '  </soap:Body>' +
                         '</soap:Envelope>',
-      GET_ISSUE_TYPES:  'body=<?xml version="1.0" encoding="utf-8"?>' +
+      GET_ISSUE_TYPES:  '<?xml version="1.0" encoding="utf-8"?>' +
                         '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"' +
                         '    xmlns:tns="%@1" xmlns:types="%@1/encodedTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
                         '<soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">' +
@@ -91,7 +90,7 @@
                         '</q1:getIssueTypesForProject>' +
                         '</soap:Body>' +
                         '</soap:Envelope>',
-      GET_PROJECTS:     'body=<?xml version="1.0" encoding="UTF-8"?>' +
+      GET_PROJECTS:     '<?xml version="1.0" encoding="UTF-8"?>' +
                         '<SOAP-ENV:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"' +
                         '    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"' +
                         '    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">' +
@@ -101,7 +100,7 @@
                         '    </m:getProjectsNoSchemes>' +
                         '  </SOAP-ENV:Body>' +
                         '</SOAP-ENV:Envelope>',
-      GET_SESSION:      'body=<?xml version="1.0" encoding="utf-8"?>' +
+      GET_SESSION:      '<?xml version="1.0" encoding="utf-8"?>' +
                         '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"' +
                         '    xmlns:tns="%@1" xmlns:types="%@1/encodedTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
                         '  <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">' +
@@ -154,12 +153,12 @@
 
     requests: {
       'addTag':           function(data, url) { return this._postJsonRequest(data, url); },
-      'createIssue':      function(data) { return this._soapRequest(data); },
-      'externalLinks':    function(ticketID) { return { url: this.resources.LINKS_URI.fmt(ticketID) }; },
-      'getAssignees':     function(data) { return this._soapRequest(data, this.resources.AGILOSOAPSERVICE_URI.fmt(this.settings.url)); },
-      'getIssueTypes':    function(data) { return this._soapRequest(data); },
-      'getProjects':      function(data) { return this._soapRequest(data); },
-      'getSession':       function(data) { return this._soapRequest(data); },
+      'createIssue':      function(data)      { return this._soapRequest(data); },
+      'externalLinks':    function(ticketID)  { return { url: this.resources.LINKS_URI.fmt(ticketID) }; },
+      'getAssignees':     function(data)      { return this._soapRequest(data, this.resources.AGILOSOAPSERVICE_URI.fmt(this.settings.url)); },
+      'getIssueTypes':    function(data)      { return this._soapRequest(data); },
+      'getProjects':      function(data)      { return this._soapRequest(data); },
+      'getSession':       function(data)      { return this._soapRequest(data); },
       'saveExternalLink': function(data, url) { return this._postJsonRequest(data, url); }
     },
 
@@ -357,7 +356,7 @@
         dataType:     'xml',
         processData:  false,
         type:         'POST',
-        url:          this.resources.PROXY_URI.fmt( url ),
+        url:          url,
         headers:      {
           'SOAPAction': 'login'
         }
