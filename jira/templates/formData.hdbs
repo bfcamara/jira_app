@@ -1,0 +1,22 @@
+<form>
+<p class="info">{{I18n.form.info}}</p>
+<div class="field">
+  <p class="title">{{I18n.form.project}}</p>
+  <p><select class="projects" name="project_id"><option></option>
+    {{#projects}}<option value="{{id}}">{{name}}</option>{{/projects}}
+  </select></p>
+</div>
+<div class="field">
+  <p class="title">{{I18n.form.issue_type}}<p>
+  <p><select name="issue_type_id">
+    {{#issueTypes}}<option value="{{id}}">{{name}}</option>{{/issueTypes}}
+  </select></p>
+</div>
+<div class="field">
+  <p class="title">{{I18n.form.assignee}}<p>
+  <p><select name="assignee_id">
+    {{#assignees}}<option value="{{name}}">{{fullname}}</option>{{/assignees}}
+  </select></p>
+</div>
+<p class="input"><input disabled="disabled" type="submit" value="{{I18n.global.submit}}" class="submit" onclick="return false"/></p>
+</form>
