@@ -112,45 +112,6 @@
                         '</soap:Envelope>'
     },
 
-    templates: {
-      main:         '<div class="jira_app">' +
-                    '  <div><h3>{{I18n.app.name}} <span class="loader" style="display: none;"></span></h3></div><hr/>' +
-                    '  <section data-sheet-name="loading" class="loading"></section>' +
-                    '  <section data-sheet-name="issue" class="issue"></section>' +
-                    '  <section data-sheet-name="message" class="message"></section>' +
-                    '  <section data-sheet-name="submitForm" class="submit_form"></section>' +
-                    '</div>',
-      formData:     '<form>' +
-                    '<p class="info">{{I18n.form.info}}</p>' +
-                    '<div class="field">' +
-                    '  <p class="title">{{I18n.form.project}}</p>' +
-                    '  <p><select class="projects" name="project_id"><option></option>' +
-                    '    {{#projects}}<option value="{{id}}">{{name}}</option>{{/projects}}' +
-                    '  </select></p>' +
-                    '</div>' +
-                    '<div class="field">' +
-                    '  <p class="title">{{I18n.form.issue_type}}<p>' +
-                    '  <p><select name="issue_type_id">' +
-                    '    {{#issueTypes}}<option value="{{id}}">{{name}}</option>{{/issueTypes}}' +
-                    '  </select></p>' +
-                    '</div>' +
-                    '<div class="field">' +
-                    '  <p class="title">{{I18n.form.assignee}}<p>' +
-                    '  <p><select name="assignee_id">' +
-                    '    {{#assignees}}<option value="{{name}}">{{fullname}}</option>{{/assignees}}' +
-                    '  </select></p>' +
-                    '</div>' +
-                    '<p class="input"><input disabled="disabled" type="submit" value="{{I18n.global.submit}}" class="submit" onclick="return false"/></p>' +
-                    '</form>',
-      issueData:    '<p>{{I18n.issue.notice}}:</p>' +
-                    '<p class="link"><a target="_blank" href="{{url}}">{{issueID}}</a></p>',
-      error:        '<div class="error">{{message}}</div>' +
-                    '<div class="back"><a href="#" onclick="return false;"><< {{I18n.global.back}}</a></div>',
-      info:         '<div class="info">{{message}}</div>',
-      success:      '<div class="success">{{message}}</div>' +
-                    '<div class="back"><a href="#" onclick="return false;"><< {{I18n.global.back}}</a></div>'
-    },
-
     requests: {
       'addTag':           function(data, url) { return this._postJsonRequest(data, url); },
       'createIssue':      function(data)      { return this._soapRequest(data); },
@@ -172,13 +133,13 @@
 
       /** Ajax Callbocks **/
       'addTag':                   'handleAddTagResult',
-      'createIssue.success':      'handleCreateIssueResult',
-      'externalLinks.success':    'handleExternalLinksResult',
-      'getAssignees.success':     'handleGetAssigneesResult',
-      'getIssueTypes.success':    'handleGetIssueTypesResult',
-      'getProjects.success':      'handleGetProjectsResult',
-      'getSession.success':       'handleGetSessionResult',
-      'saveExternalLink.success': 'handleSaveExternalLinkResult',
+      'createIssue.done':      'handleCreateIssueResult',
+      'externalLinks.done':    'handleExternalLinksResult',
+      'getAssignees.done':     'handleGetAssigneesResult',
+      'getIssueTypes.done':    'handleGetIssueTypesResult',
+      'getProjects.done':      'handleGetProjectsResult',
+      'getSession.done':       'handleGetSessionResult',
+      'saveExternalLink.done': 'handleSaveExternalLinkResult',
 
       'createIssue.fail':      'handleFailedRequest',
       'externalLinks.fail':    'handleFailedRequest',
