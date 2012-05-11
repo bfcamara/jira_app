@@ -133,13 +133,13 @@
 
       /** Ajax Callbocks **/
       'addTag':                   'handleAddTagResult',
-      'createIssue.success':      'handleCreateIssueResult',
-      'externalLinks.success':    'handleExternalLinksResult',
-      'getAssignees.success':     'handleGetAssigneesResult',
-      'getIssueTypes.success':    'handleGetIssueTypesResult',
-      'getProjects.success':      'handleGetProjectsResult',
-      'getSession.success':       'handleGetSessionResult',
-      'saveExternalLink.success': 'handleSaveExternalLinkResult',
+      'createIssue.done':      'handleCreateIssueResult',
+      'externalLinks.done':    'handleExternalLinksResult',
+      'getAssignees.done':     'handleGetAssigneesResult',
+      'getIssueTypes.done':    'handleGetIssueTypesResult',
+      'getProjects.done':      'handleGetProjectsResult',
+      'getSession.done':       'handleGetSessionResult',
+      'saveExternalLink.done': 'handleSaveExternalLinkResult',
 
       'createIssue.fail':      'handleFailedRequest',
       'externalLinks.fail':    'handleFailedRequest',
