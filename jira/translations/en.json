@@ -11,7 +11,7 @@
     "name":         "Jira"
   },
 
-  "exception": "An error occured: %@",
+  "exception": "An error occured: {{error}}",
 
   "form": {
     "assignee":     "Assignee",

@@ -1,2 +1,0 @@
-<p>{{I18n.issue.notice}}:</p>
-<p class="link"><a target="_blank" href="{{url}}">{{issueID}}</a></p>

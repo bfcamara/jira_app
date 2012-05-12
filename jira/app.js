@@ -3,12 +3,12 @@
   return ZendeskApps.defineApp(ZendeskApps.Site.TICKET_PROPERTIES, {
     appID: '/apps/01-jira/versions/1.0.0',
 
-    defaultSheet: 'loading',
+    defaultState: 'loading',
 
     dependencies: {
-      currentTicketDescription: 'workspace.ticket.description',
-      currentTicketID:          'workspace.ticket.id',
-      currentTicketSubject:     'workspace.ticket.subject'
+      currentTicketDescription: 'ticket.description',
+      currentTicketID:          'ticket.id',
+      currentTicketSubject:     'ticket.subject'
     },
 
     // Local vars
@@ -115,8 +115,8 @@
     requests: {
       'addTag':           function(data, url) { return this._postJsonRequest(data, url); },
       'createIssue':      function(data)      { return this._soapRequest(data); },
-      'externalLinks':    function(ticketID)  { return { url: this.resources.LINKS_URI.fmt(ticketID) }; },
-      'getAssignees':     function(data)      { return this._soapRequest(data, this.resources.AGILOSOAPSERVICE_URI.fmt(this.settings.url)); },
+      'externalLinks':    function(ticketID)  { return { url: helpers.fmt(this.resources.LINKS_URI, ticketID) }; },
+      'getAssignees':     function(data)      { return this._soapRequest(data, helpers.fmt(this.resources.AGILOSOAPSERVICE_URI, this.settings.url)); },
       'getIssueTypes':    function(data)      { return this._soapRequest(data); },
       'getProjects':      function(data)      { return this._soapRequest(data); },
       'getSession':       function(data)      { return this._soapRequest(data); },
@@ -163,10 +163,10 @@
       this.projectID =  projectID;
 
       this.disableInput(form);
-      this.request('getIssueTypes').perform(this._xmlTemplateGetIssueTypes(projectID));
+      this.ajax('getIssueTypes', this._xmlTemplateGetIssueTypes(projectID));
     },
 
-    firstLookup: function() { this.request('externalLinks').perform(this.deps.currentTicketID); },
+    firstLookup: function() { this.ajax('externalLinks', this.dependency('currentTicketID')); },
 
     handleAddTagResult: function() {
       // Find way to show added tag to currently displayed ticket
@@ -176,9 +176,9 @@
       if (this.exceptionOccurred(data)) return;
       var issueID = this.$(data).find('multiRef').children('key').text(), requestData, url;
 
-      requestData =  { "external_link": { "type": "JiraIssue", "issue_id": issueID } };
-      url =   this.resources.LINKS_URI.fmt(this.deps.currentTicketID);
-      this.request('saveExternalLink').perform(requestData, url);
+      requestData = { "external_link": { "type": "JiraIssue", "issue_id": issueID } };
+      url = helpers.fmt(this.resources.LINKS_URI, this.dependency('currentTicketID'));
+      this.ajax('saveExternalLink', requestData, url);
     },
 
     handleExternalLinksResult: function(e, data) {
@@ -187,7 +187,7 @@
       if (issue) {
         this._renderIssue(issue);
       } else {
-        this.request('getSession').perform(this._xmlTemplateGetSession());
+        this.ajax('getSession', this._xmlTemplateGetSession());
       }
     },
 
@@ -198,9 +198,7 @@
 
       results = this._extractInfo(assignees, ['fullname', 'name']);
 
-      this.sheet('submitForm')
-          .render('formData', { assignees: this._sortArrayByName(results), issueTypes: this._sortArrayByName(this.issueTypes), projects: this._sortArrayByName(this.projects) })
-          .show();
+      this.switchTo('submitForm', { assignees: this._sortArrayByName(results), issueTypes: this._sortArrayByName(this.issueTypes), projects: this._sortArrayByName(this.projects) });
 
       form = this.$('.submit_form form');
       this.enableInput(form);
@@ -215,7 +213,7 @@
       this.issueTypes = this._extractInfo(types, ['id', 'name']);
 
       key = this.projects.findProperty('id', this.projectID).key;
-      this.request('getAssignees').perform(this._xmlTemplateGetAssignees(key));
+      this.ajax('getAssignees', this._xmlTemplateGetAssignees(key));
     },
 
     handleGetProjectsResult: function(e, data) {
@@ -228,9 +226,7 @@
       this.projects = this._extractInfo(projects, ['id', 'key', 'name']);
       sorted = this._sortArrayByName(this.projects);
 
-      this.sheet('submitForm')
-          .render('formData', { projects: sorted })
-          .show();
+      this.switchTo('submitForm', { projects: sorted });
     },
 
     handleGetSessionResult: function(e, data) {
@@ -241,7 +237,7 @@
 
         this.showMessage(this.I18n.t('login.success'));
         this.$('.loader').show();
-        this.request('getProjects').perform(this._xmlTemplateGetProjects());
+        this.ajax('getProjects', this._xmlTemplateGetProjects());
       } else {
         this.showError(this.I18n.t('login.failed'));
       }
@@ -251,7 +247,7 @@
       this.showSuccess(this.I18n.t('form.success'));
 
       // Don't need to show message if this fails
-      this.request('addTag').perform( { "ticket": { "additional_tags": "jira" } }, this.resources.TICKET_URI.fmt(this.deps.currentTicketID) );
+      this.ajax('addTag', { "ticket": { "additional_tags": "jira" } }, helpers.fmt(this.resources.TICKET_URI, this.dependency('currentTicketID')) );
     },
 
     exceptionOccurred: function(data) {
@@ -259,7 +255,7 @@
 
       if (fault.length) {
         message = fault.text().replace(/^[^\s]*\s*(.*)/, '$1');
-        this.showError(this.I18n.t('exception').fmt(message));
+        this.showError(this.I18n.t('exception', { error: message }));
         return true;
       }
       return false;
@@ -273,7 +269,7 @@
           projectKey =  this.projects.findProperty('id', projectID).key;
 
       this.disableInput(form);
-      this.request('createIssue').perform(this._xmlTemplateCreateIssue({ assigneeID: assigneeID, issueTypeID: issueTypeID, projectKey: projectKey }));
+      this.ajax('createIssue', this._xmlTemplateCreateIssue({ assigneeID: assigneeID, issueTypeID: issueTypeID, projectKey: projectKey }));
     },
 
     _extractInfo: function(elements, fields) {
@@ -302,16 +298,14 @@
     },
 
     _renderIssue: function(issue) {
-      var issueID =   issue.external_link.issue_id,
-          issueURL =  this.resources.ISSUE_URI.fmt(this.settings.url, issueID);
+      var issueID   = issue.external_link.issue_id,
+          issueURL  = helpers.fmt(this.resources.ISSUE_URI, this.settings.url, issueID);
 
-      this.sheet('issue')
-          .render('issueData', { issueID: issueID, url: issueURL })
-          .show();
+      this.switchTo('issue', { issueID: issueID, url: issueURL });
     },
 
     _soapRequest: function(data, url) {
-      url = url || this.resources.JIRASOAPSERVICE_URI.fmt(this.settings.url);
+      url = url || helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url);
       return {
         data:         data,
         dataType:     'xml',
@@ -333,13 +327,14 @@
 
     _xmlTemplateCreateIssue: function(options) {
       return encodeURI( 
-        this.xmlTemplates.CREATE_ISSUE.fmt(
-          this.resources.JIRASOAPSERVICE_URI.fmt(this.settings.url),
+        helpers.fmt(
+          this.xmlTemplates.CREATE_ISSUE,
+          helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url),
           this.sessionID,
           options.assigneeID,
-          this.deps.currentTicketDescription,
+          this.dependency('currentTicketDescription'),
           options.projectKey,
-          this.deps.currentTicketSubject,
+          this.dependency('currentTicketSubject'),
           options.issueTypeID,
           this.settings.customFieldID,
           this.currentTicketID
@@ -348,19 +343,19 @@
     },
 
     _xmlTemplateGetAssignees: function(projectKey) {
-      return encodeURI( this.xmlTemplates.GET_ASSIGNEES.fmt(this.resources.AGILOSOAPSERVICE_URI.fmt(this.settings.url), this.sessionID, projectKey, this.settings.url) );
+      return encodeURI( helpers.fmt(this.xmlTemplates.GET_ASSIGNEES, helpers.fmt(this.resources.AGILOSOAPSERVICE_URI, this.settings.url), this.sessionID, projectKey, this.settings.url) );
     },
 
     _xmlTemplateGetIssueTypes: function(projectID) {
-      return encodeURI( this.xmlTemplates.GET_ISSUE_TYPES.fmt(this.resources.JIRASOAPSERVICE_URI.fmt(this.settings.url), this.sessionID, projectID) );
+      return encodeURI( helpers.fmt(this.xmlTemplates.GET_ISSUE_TYPES, helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url), this.sessionID, projectID) );
     },
 
     _xmlTemplateGetProjects: function() {
-      return encodeURI( this.xmlTemplates.GET_PROJECTS.fmt(this.resources.JIRASOAPSERVICE_URI.fmt(this.settings.url), this.sessionID) );
+      return encodeURI( helpers.fmt(this.xmlTemplates.GET_PROJECTS, helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url), this.sessionID) );
     },
 
     _xmlTemplateGetSession: function() {
-      return encodeURI( this.xmlTemplates.GET_SESSION.fmt(this.resources.JIRASOAPSERVICE_URI.fmt(this.settings.url), this.settings.username, this.settings.password) );
+      return encodeURI( helpers.fmt(this.xmlTemplates.GET_SESSION, helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url), this.settings.username, this.settings.password) );
     },
 
     /** Helpers **/
@@ -396,21 +391,15 @@
     handleFailedRequest: function(event, jqXHR, textStatus, errorThrown) { this.showError( this.I18n.t('problem', { error: errorThrown.toString() }) ); },
 
     showError: function(msg) {
-      this.sheet('message')
-        .render('error', { message: msg })
-        .show();
+      this.switchTo('error', { message: msg });
     },
 
     showMessage: function(msg) {
-      this.sheet('message')
-        .render('info', { message: msg })
-        .show();
+      this.switchTo('info', { message: msg });
     },
 
     showSuccess: function(msg) {
-      this.sheet('message')
-        .render('success', { message: msg })
-        .show();
+      this.switchTo('success', { message: msg });
     }
 
   });
