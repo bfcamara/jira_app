@@ -219,7 +219,7 @@
     handleGetProjectsResult: function(e, data) {
       var projects = this.$(data).find('multiRef'), sorted;
 
-      this.$('.loader').hide();
+      this.hideLoader();
 
       if (this.exceptionOccurred(data)) return;
 
@@ -236,7 +236,7 @@
         this.sessionID = loginReturn.text();
 
         this.showMessage(this.I18n.t('login.success'));
-        this.$('.loader').show();
+        this.showLoader();
         this.ajax('getProjects', this._xmlTemplateGetProjects());
       } else {
         this.showError(this.I18n.t('login.failed'));
@@ -389,6 +389,16 @@
     },
 
     handleFailedRequest: function(event, jqXHR, textStatus, errorThrown) { this.showError( this.I18n.t('problem', { error: errorThrown.toString() }) ); },
+
+    hideLoader: function() {
+      this.$('.loader').hide();
+      this.$('.logo').show();
+    },
+
+    showLoader: function() {
+      this.$('.logo').hide();
+      this.$('.loader').show();
+    },
 
     showError: function(msg) {
       this.switchTo('error', { message: msg });
