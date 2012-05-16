@@ -5,7 +5,7 @@
   },
 
   "default_locale": "en",
-  "private": true,
+  "private": false,
 
   "configuration": {
     "customFieldID": {
