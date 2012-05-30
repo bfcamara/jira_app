@@ -1,6 +1,6 @@
 {
   "app": {
-    "configuration": {
+    "parameters": {
       "customFieldID":  { "label": "Custom Field ID" },
       "password":       { "label": "Password" },
       "username":       { "label": "Username" },

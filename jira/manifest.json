@@ -8,25 +8,29 @@
   "default_locale": "en",
   "private": false,
 
-  "configuration": {
-    "customFieldID": {
-      "type": "text",
+  "parameters": [
+    {
+      "name": "url",
+      "type": "url",
       "required": "true"
     },
 
-    "password": {
+    {
+      "name": "password",
       "type": "password",
       "required": "true"
     },
 
-    "username": {
+    {
+      "name": "username",
       "type": "text",
       "required": "true"
     },
 
-    "url": {
-      "type": "url",
+    {
+      "name": "customFieldID",
+      "type": "text",
       "required": "true"
     }
-  }
+  ]
 }
