@@ -5,12 +5,6 @@
 
     defaultState: 'loading',
 
-    dependencies: {
-      currentTicketDescription: 'ticket.description',
-      currentTicketID:          'ticket.id',
-      currentTicketSubject:     'ticket.subject'
-    },
-
     // Local vars
     projects:   [],
     projectID:  undefined,
@@ -129,7 +123,7 @@
       'click .submit_form .submit':                   'submitIssue',
 
       /** Apps Callbacks **/
-      'currentTicketID.changed': 'firstLookup',
+      'app.activated': 'firstLookup',
 
       /** Ajax Callbocks **/
       'addTag':                   'handleAddTagResult',
@@ -166,7 +160,7 @@
       this.ajax('getIssueTypes', this._xmlTemplateGetIssueTypes(projectID));
     },
 
-    firstLookup: function() { this.ajax('externalLinks', this.dependency('currentTicketID')); },
+    firstLookup: function() { this.ajax('externalLinks', this.ticket().id()); },
 
     handleAddTagResult: function() {
       // Find way to show added tag to currently displayed ticket
@@ -177,7 +171,7 @@
       var issueID = this.$(data).find('multiRef').children('key').text(), requestData, url;
 
       requestData = { "external_link": { "type": "JiraIssue", "issue_id": issueID } };
-      url = helpers.fmt(this.resources.LINKS_URI, this.dependency('currentTicketID'));
+      url = helpers.fmt(this.resources.LINKS_URI, this.ticket().id());
       this.ajax('saveExternalLink', requestData, url);
     },
 
@@ -247,7 +241,7 @@
       this.showSuccess(this.I18n.t('form.success'));
 
       // Don't need to show message if this fails
-      this.ajax('addTag', { "ticket": { "additional_tags": "jira" } }, helpers.fmt(this.resources.TICKET_URI, this.dependency('currentTicketID')) );
+      this.ajax('addTag', { "ticket": { "additional_tags": "jira" } }, helpers.fmt(this.resources.TICKET_URI, this.ticket().id()) );
     },
 
     exceptionOccurred: function(data) {
@@ -332,12 +326,12 @@
           helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url),
           this.sessionID,
           options.assigneeID,
-          this.dependency('currentTicketDescription'),
+          this.ticket().description(),
           options.projectKey,
-          this.dependency('currentTicketSubject'),
+          this.ticket().subject(),
           options.issueTypeID,
           this.settings.customFieldID,
-          this.currentTicketID
+          this.ticket().id()
         )
       );
     },
