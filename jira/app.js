@@ -6,9 +6,10 @@
     defaultState: 'loading',
 
     // Local vars
-    projects:   [],
-    projectID:  undefined,
-    sessionID:  undefined,
+    projects:         [],
+    projectID:        undefined,
+    sessionID:        undefined,
+    TICKET_JIRA_TAG:  "jira",
 
     resources: {
       AGILOSOAPSERVICE_URI: "%@/rpc/soap/agilossoapservice-v1",
@@ -126,22 +127,23 @@
       'app.activated': 'firstLookup',
 
       /** Ajax Callbocks **/
-      'addTag':                   'handleAddTagResult',
-      'createIssue.done':      'handleCreateIssueResult',
-      'externalLinks.done':    'handleExternalLinksResult',
-      'getAssignees.done':     'handleGetAssigneesResult',
-      'getIssueTypes.done':    'handleGetIssueTypesResult',
-      'getProjects.done':      'handleGetProjectsResult',
-      'getSession.done':       'handleGetSessionResult',
-      'saveExternalLink.done': 'handleSaveExternalLinkResult',
+      'addTag.done':            'handleAddTagResult',
+      'createIssue.done':       'handleCreateIssueResult',
+      'externalLinks.done':     'handleExternalLinksResult',
+      'getAssignees.done':      'handleGetAssigneesResult',
+      'getIssueTypes.done':     'handleGetIssueTypesResult',
+      'getProjects.done':       'handleGetProjectsResult',
+      'getSession.done':        'handleGetSessionResult',
+      'saveExternalLink.done':  'handleSaveExternalLinkResult',
 
-      'createIssue.fail':      'handleFailedRequest',
-      'externalLinks.fail':    'handleFailedRequest',
-      'getAssignees.fail':     'handleFailedRequest',
-      'getIssueTypes.fail':    'handleFailedRequest',
-      'getProjects.fail':      'handleFailedRequest',
-      'getSession.fail':       'handleFailedRequest',
-      'saveExternalLink.fail': 'handleFailedRequest'
+      'addTag.fail':            'handleFailedRequest',
+      'createIssue.fail':       'handleFailedRequest',
+      'externalLinks.fail':     'handleFailedRequest',
+      'getAssignees.fail':      'handleFailedRequest',
+      'getIssueTypes.fail':     'handleFailedRequest',
+      'getProjects.fail':       'handleFailedRequest',
+      'getSession.fail':        'handleFailedRequest',
+      'saveExternalLink.fail':  'handleFailedRequest'
     },
 
     changeProject: function() {
@@ -162,8 +164,8 @@
 
     firstLookup: function() { this.ajax('externalLinks', this.ticket().id()); },
 
-    handleAddTagResult: function() {
-      // Find way to show added tag to currently displayed ticket
+    handleAddTagResult: function(e, data) {
+      this.ticket().tags().add(this.TICKET_JIRA_TAG);
     },
 
     handleCreateIssueResult: function(e, data) {
@@ -241,7 +243,7 @@
       this.showSuccess(this.I18n.t('form.success'));
 
       // Don't need to show message if this fails
-      this.ajax('addTag', { "ticket": { "additional_tags": "jira" } }, helpers.fmt(this.resources.TICKET_URI, this.ticket().id()) );
+      this.ajax('addTag', { "ticket": { "additional_tags": this.TICKET_JIRA_TAG } }, helpers.fmt(this.resources.TICKET_URI, this.ticket().id()) );
     },
 
     exceptionOccurred: function(data) {
