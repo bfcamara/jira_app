@@ -162,11 +162,11 @@
 
     firstLookup: function() { this.ajax('externalLinks', this.ticket().id()); },
 
-    handleAddTagResult: function(e, data) {
+    handleAddTagResult: function(data) {
       this.ticket().tags().add(this.TICKET_JIRA_TAG);
     },
 
-    handleCreateIssueResult: function(e, data) {
+    handleCreateIssueResult: function(data) {
       if (this.exceptionOccurred(data)) return;
       var issueID = this.$(data).find('multiRef').children('key').text(), requestData, url;
 
@@ -175,7 +175,7 @@
       this.ajax('saveExternalLink', requestData, url);
     },
 
-    handleExternalLinksResult: function(e, data) {
+    handleExternalLinksResult: function(data) {
       var issue = data.find(function(el) { return el.external_link_type === 'JiraIssue'; });
 
       if (issue) {
@@ -185,7 +185,7 @@
       }
     },
 
-    handleGetAssigneesResult: function(e, data) {
+    handleGetAssigneesResult: function(data) {
       var assignees = this.$(data).find('multiRef'), form, results;
 
       // Avoid testing result from request, as it's not working for some JIRA configurations and there is an option to 'Allow unassigned issues' in JIRA
@@ -199,7 +199,7 @@
       form.find('select[name=project_id]').val(this.projectID);
     },
 
-    handleGetIssueTypesResult: function(e, data) {
+    handleGetIssueTypesResult: function(data) {
       var key, sorted, types = this.$(data).find('multiRef');
 
       if (this.exceptionOccurred(data)) return;
@@ -210,7 +210,7 @@
       this.ajax('getAssignees', this._xmlTemplateGetAssignees(key));
     },
 
-    handleGetProjectsResult: function(e, data) {
+    handleGetProjectsResult: function(data) {
       var projects = this.$(data).find('multiRef'), sorted;
 
       this.hideLoader();
@@ -223,7 +223,7 @@
       this.switchTo('submitForm', { projects: sorted });
     },
 
-    handleGetSessionResult: function(e, data) {
+    handleGetSessionResult: function(data) {
       var loginReturn = this.$(data).find('loginReturn');
 
       if ( loginReturn ) {
@@ -237,7 +237,7 @@
       }
     },
 
-    handleSaveExternalLinkResult: function(e, data) {
+    handleSaveExternalLinkResult: function(data) {
       this.showSuccess(this.I18n.t('form.success'));
 
       // Don't need to show message if this fails
@@ -382,7 +382,7 @@
         .val(submit.data('originalValue'));
     },
 
-    handleFailedRequest: function(event, jqXHR, textStatus, errorThrown) { this.showError( this.I18n.t('problem', { error: errorThrown.toString() }) ); },
+    handleFailedRequest: function(jqXHR, textStatus, errorThrown) { this.showError( this.I18n.t('problem', { error: errorThrown.toString() }) ); },
 
     hideLoader: function() {
       this.$('.loader').hide();
