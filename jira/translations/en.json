@@ -7,8 +7,7 @@
       "url":            { "label": "URL" }
     },
 
-    "description":  "Shows related information from a linked JIRA ticket",
-    "name":         "Jira"
+    "description":  "Shows related information from a linked JIRA ticket"
   },
 
   "exception": "An error occured: {{error}}",
