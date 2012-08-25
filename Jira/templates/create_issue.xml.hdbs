@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:tns="{{xmlnsRoot}}" xmlns:types="{{xmlnsRoot}}/encodedTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+    <q1:createIssue xmlns:q1="http://soap.rpc.jira.atlassian.com">
+      <in0 xsi:type="xsd:string">{{sessionID}}</in0>
+      <in1 href="#id1" />
+    </q1:createIssue>
+    <q2:RemoteIssue id="id1" xsi:type="q2:RemoteIssue" xmlns:q2="http://beans.soap.rpc.jira.atlassian.com">
+      <id xsi:nil="true" />
+      <affectsVersions xsi:nil="true" />
+      <assignee xsi:type="xsd:string">{{assigneID}}</assignee>
+      <attachmentNames xsi:nil="true" />
+      <components xsi:nil="true" />
+      <created xsi:nil="true" />
+      <customFieldValues xsi:nil="true" />
+      <description><![CDATA[{{description}}]]></description>
+      <duedate xsi:nil="true" />
+      <environment xsi:nil="true" />
+      <fixVersions xsi:nil="true" />
+      <key xsi:nil="true" />
+      <priority xsi:nil="true" />
+      <project xsi:type="xsd:string">{{projectKey}}</project>
+      <reporter xsi:nil="true" />
+      <resolution xsi:nil="true" />
+      <status xsi:nil="true" />
+      <summary xsi:type="xsd:string"><![CDATA[{{summary}}]]></summary>
+      <type xsi:type="xsd:string">{{issueTypeID}}</type>
+      <updated xsi:nil="true" />
+      <votes xsi:nil="true" />
+      <customFieldValues href="#id2" />
+    </q2:RemoteIssue>
+    <soapenc:Array id="id2" xmlns:q3="http://beans.soap.rpc.jira.atlassian.com" soapenc:arrayType="q3:RemoteCustomFieldValue[1]">
+      <Item href="#id3" />
+    </soapenc:Array>
+    <q4:RemoteCustomFieldValue id="id3" xsi:type="q4:RemoteCustomFieldValue" xmlns:q4="http://beans.soap.rpc.jira.atlassian.com">
+      <customfieldId xsi:type="xsd:string">customfield_{{customFieldID}}</customfieldId>
+      <key xsi:nil="true" />
+      <values href="#id4" />
+    </q4:RemoteCustomFieldValue>
+    <soapenc:Array id="id4" soapenc:arrayType="xsd:string[1]">
+      <Item>{{ticketID}}</Item>
+    </soapenc:Array>
+  </soap:Body>
+</soap:Envelope>

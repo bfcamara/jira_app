@@ -17,94 +17,6 @@
       TICKET_URI:           "/tickets/%@.json?_method=put"
     },
 
-    xmlTemplates: {
-      CREATE_ISSUE:     '<?xml version="1.0" encoding="ISO-8859-1"?>' +
-                        '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"' +
-                        '    xmlns:tns="%@1" xmlns:types="%@1/encodedTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
-                        '  <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">' +
-                        '    <q1:createIssue xmlns:q1="http://soap.rpc.jira.atlassian.com">' +
-                        '      <in0 xsi:type="xsd:string">%@2</in0>' +
-                        '      <in1 href="#id1" />' +
-                        '    </q1:createIssue>' +
-                        '    <q2:RemoteIssue id="id1" xsi:type="q2:RemoteIssue" xmlns:q2="http://beans.soap.rpc.jira.atlassian.com">' +
-                        '      <id xsi:nil="true" />' +
-                        '      <affectsVersions xsi:nil="true" />' +
-                        '      <assignee xsi:type="xsd:string">%@3</assignee>' +
-                        '      <attachmentNames xsi:nil="true" />' +
-                        '      <components xsi:nil="true" />' +
-                        '      <created xsi:nil="true" />' +
-                        '      <customFieldValues xsi:nil="true" />' +
-                        '      <description><![CDATA[%@4]]></description>' +
-                        '      <duedate xsi:nil="true" />' +
-                        '      <environment xsi:nil="true" />' +
-                        '      <fixVersions xsi:nil="true" />' +
-                        '      <key xsi:nil="true" />' +
-                        '      <priority xsi:nil="true" />' +
-                        '      <project xsi:type="xsd:string">%@5</project>' +
-                        '      <reporter xsi:nil="true" />' +
-                        '      <resolution xsi:nil="true" />' +
-                        '      <status xsi:nil="true" />' +
-                        '      <summary xsi:type="xsd:string"><![CDATA[%@6]]></summary>' +
-                        '      <type xsi:type="xsd:string">%@7</type>' +
-                        '      <updated xsi:nil="true" />' +
-                        '      <votes xsi:nil="true" />' +
-                        '      <customFieldValues href="#id2" />' +
-                        '    </q2:RemoteIssue>' +
-                        '    <soapenc:Array id="id2" xmlns:q3="http://beans.soap.rpc.jira.atlassian.com" soapenc:arrayType="q3:RemoteCustomFieldValue[1]">' +
-                        '      <Item href="#id3" />' +
-                        '    </soapenc:Array>' +
-                        '    <q4:RemoteCustomFieldValue id="id3" xsi:type="q4:RemoteCustomFieldValue" xmlns:q4="http://beans.soap.rpc.jira.atlassian.com">' +
-                        '      <customfieldId xsi:type="xsd:string">customfield_%@8</customfieldId>' +
-                        '      <key xsi:nil="true" />' +
-                        '      <values href="#id4" />' +
-                        '    </q4:RemoteCustomFieldValue>' +
-                        '    <soapenc:Array id="id4" soapenc:arrayType="xsd:string[1]">' +
-                        '      <Item>%@9</Item>' +
-                        '    </soapenc:Array>' +
-                        '  </soap:Body>' +
-                        '</soap:Envelope>',
-      GET_ASSIGNEES:    '<?xml version="1.0" encoding="utf-8"?>' +
-                        '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"' +
-                        '    xmlns:tns="%@1" xmlns:types="%@1/encodedTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
-                        '  <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">' +
-                        '    <q1:getAssignableUsers xmlns:q1="%@4">' +
-                        '      <in0 xsi:type="xsd:string">%@2</in0>' +
-                        '      <in1 xsi:type="xsd:string">%@3</in1>' +
-                        '    </q1:getAssignableUsers>' +
-                        '  </soap:Body>' +
-                        '</soap:Envelope>',
-      GET_ISSUE_TYPES:  '<?xml version="1.0" encoding="utf-8"?>' +
-                        '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"' +
-                        '    xmlns:tns="%@1" xmlns:types="%@1/encodedTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
-                        '<soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">' +
-                        '<q1:getIssueTypesForProject xmlns:q1="http://soap.rpc.jira.atlassian.com">' +
-                        '<in0 xsi:type="xsd:string">%@2</in0>' +
-                        '<in1 xsi:type="xsd:string">%@3</in1>' +
-                        '</q1:getIssueTypesForProject>' +
-                        '</soap:Body>' +
-                        '</soap:Envelope>',
-      GET_PROJECTS:     '<?xml version="1.0" encoding="UTF-8"?>' +
-                        '<SOAP-ENV:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"' +
-                        '    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"' +
-                        '    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">' +
-                        '  <SOAP-ENV:Body>' +
-                        '    <m:getProjectsNoSchemes xmlns:m="%@">' +
-                        '      <in0 xsi:type="xsd:string">%@</in0>' +
-                        '    </m:getProjectsNoSchemes>' +
-                        '  </SOAP-ENV:Body>' +
-                        '</SOAP-ENV:Envelope>',
-      GET_SESSION:      '<?xml version="1.0" encoding="utf-8"?>' +
-                        '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"' +
-                        '    xmlns:tns="%@1" xmlns:types="%@1/encodedTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">' +
-                        '  <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">' +
-                        '    <q1:login xmlns:q1="http://soap.rpc.jira.atlassian.com">' +
-                        '      <in0 xsi:type="xsd:string">%@2</in0>' +
-                        '      <in1 xsi:type="xsd:string"><![CDATA[%@3]]></in1>' +
-                        '    </q1:login>' +
-                        '  </soap:Body>' +
-                        '</soap:Envelope>'
-    },
-
     requests: {
       'addTag':           function(data, url) { return this._postJsonRequest(data, url); },
       'createIssue':      function(data)      { return this._soapRequest(data); },
@@ -320,36 +232,54 @@
     },
 
     _xmlTemplateCreateIssue: function(options) {
-      return encodeURI( 
-        helpers.fmt(
-          this.xmlTemplates.CREATE_ISSUE,
-          helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url),
-          this.sessionID,
-          options.assigneeID,
-          this.ticket().description(),
-          options.projectKey,
-          this.ticket().subject(),
-          options.issueTypeID,
-          this.settings.customFieldID,
-          this.ticket().id()
-        )
-      );
+      var message = this.renderTemplate('create_issue.xml', {
+        xmlnsRoot: helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url),
+        sessionID: this.sessionID,
+        assigneeID: options.assigneeID,
+        description: this.ticket().description(),
+        projectKey: options.projectKey,
+        summary: this.ticket().subject(),
+        issueTypeID: options.issueTypeID,
+        customFieldID: this.settings.customFieldID,
+        ticketID: this.ticket().id()
+      })
+      return encodeURI( message );
     },
 
     _xmlTemplateGetAssignees: function(projectKey) {
-      return encodeURI( helpers.fmt(this.xmlTemplates.GET_ASSIGNEES, helpers.fmt(this.resources.AGILOSOAPSERVICE_URI, this.settings.url), this.sessionID, projectKey, this.settings.url) );
+      var message = this.renderTemplate('get_assignees.xml', {
+        xmlnsRoot: helpers.fmt(this.resources.AGILOSOAPSERVICE_URI, this.settings.url),
+        url: this.settings.url,
+        sessionID: this.sessionID,
+        projectKey: projectKey
+      });
+      return encodeURI( message );
     },
 
     _xmlTemplateGetIssueTypes: function(projectID) {
-      return encodeURI( helpers.fmt(this.xmlTemplates.GET_ISSUE_TYPES, helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url), this.sessionID, projectID) );
+      var message = this.renderTemplate('get_issue_types.xml', {
+        xmlnsRoot: helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url),
+        sessionID: this.sessionID,
+        projectID: projectID
+      });
+      return encodeURI( message );
     },
 
     _xmlTemplateGetProjects: function() {
-      return encodeURI( helpers.fmt(this.xmlTemplates.GET_PROJECTS, helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url), this.sessionID) );
+      var message = this.renderTemplate('get_projects.xml', {
+        uri: helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url),
+        sessionID: this.sessionID
+      });
+      return encodeURI( message );
     },
 
     _xmlTemplateGetSession: function() {
-      return encodeURI( helpers.fmt(this.xmlTemplates.GET_SESSION, helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url), this.settings.username, this.settings.password) );
+      var message = this.rendeTemplate('get_session.xml', {
+        xmlnsRoot: helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url),
+        username: this.settings.username,
+        password: this.settings.password
+      });
+      return encodeURI( message );
     },
 
     /** Helpers **/
