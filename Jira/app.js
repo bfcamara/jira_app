@@ -242,7 +242,7 @@
         issueTypeID: options.issueTypeID,
         customFieldID: this.settings.customFieldID,
         ticketID: this.ticket().id()
-      })
+      });
       return encodeURI( message );
     },
 
