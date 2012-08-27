@@ -274,7 +274,7 @@
     },
 
     _xmlTemplateGetSession: function() {
-      var message = this.rendeTemplate('get_session.xml', {
+      var message = this.renderTemplate('get_session.xml', {
         xmlnsRoot: helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url),
         username: this.settings.username,
         password: this.settings.password
