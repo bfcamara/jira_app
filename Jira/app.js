@@ -232,7 +232,7 @@
     },
 
     _xmlTemplateCreateIssue: function(options) {
-      var message = this.renderTemplate('create_issue.xml', {
+      return this.renderAndEscapeXML('create_issue.xml', {
         xmlnsRoot: helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url),
         sessionID: this.sessionID,
         assigneeID: options.assigneeID,
@@ -243,43 +243,38 @@
         customFieldID: this.settings.customFieldID,
         ticketID: this.ticket().id()
       });
-      return encodeURI( message );
     },
 
     _xmlTemplateGetAssignees: function(projectKey) {
-      var message = this.renderTemplate('get_assignees.xml', {
+      return this.renderAndEscapeXML('get_assignees.xml', {
         xmlnsRoot: helpers.fmt(this.resources.AGILOSOAPSERVICE_URI, this.settings.url),
         url: this.settings.url,
         sessionID: this.sessionID,
         projectKey: projectKey
       });
-      return encodeURI( message );
     },
 
     _xmlTemplateGetIssueTypes: function(projectID) {
-      var message = this.renderTemplate('get_issue_types.xml', {
+      return this.renderAndEscapeXML('get_issue_types.xml', {
         xmlnsRoot: helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url),
         sessionID: this.sessionID,
         projectID: projectID
       });
-      return encodeURI( message );
     },
 
     _xmlTemplateGetProjects: function() {
-      var message = this.renderTemplate('get_projects.xml', {
+      return this.renderAndEscapeXML('get_projects.xml', {
         uri: helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url),
         sessionID: this.sessionID
       });
-      return encodeURI( message );
     },
 
     _xmlTemplateGetSession: function() {
-      var message = this.renderTemplate('get_session.xml', {
+      return this.renderAndEscapeXML('get_session.xml', {
         xmlnsRoot: helpers.fmt(this.resources.JIRASOAPSERVICE_URI, this.settings.url),
         username: this.settings.username,
         password: this.settings.password
       });
-      return encodeURI( message );
     },
 
     /** Helpers **/
@@ -334,6 +329,13 @@
 
     showSuccess: function(msg) {
       this.switchTo('success', { message: msg });
+    },
+
+    renderAndEscapeXML: function(templateName, data) {
+      Object.keys(data).forEach(function(key) {
+        data[key] = helpers.safeString( data[key] );
+      });
+      return encodeURI( this.renderTemplate(templateName, data) );
     }
 
   };
