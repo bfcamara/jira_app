@@ -3,6 +3,8 @@
     "description":  "Shows related information from a linked JIRA ticket"
   },
 
+  "loading": "Loading...",
+
   "unshared": {
     "isUnshared": "This ticket is not currently associated with a JIRA issue.",
     "selectToShare": "Select your JIRA agreement from the \"Share\" menu."
