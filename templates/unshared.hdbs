@@ -1,0 +1,2 @@
+<p>{{t "unshared.isUnshared"}}</p>
+<p>{{t "unshared.selectToShare"}}</p>

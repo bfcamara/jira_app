@@ -1,3 +1,0 @@
-<div class="message">
-  <div class="info">{{message}}</div>
-</div>

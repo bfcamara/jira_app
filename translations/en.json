@@ -1,39 +1,10 @@
 {
   "app": {
-    "parameters": {
-      "customFieldID":  { "label": "Custom Field ID" },
-      "password":       { "label": "Password" },
-      "username":       { "label": "Username" },
-      "url":            { "label": "URL" }
-    },
-
     "description":  "Shows related information from a linked JIRA ticket"
   },
 
-  "exception": "An error occured: {{error}}",
-
-  "form": {
-    "assignee":     "Assignee",
-    "info":         "Submit this ticket as a new issue",
-    "issue_type":   "Type",
-    "project":      "Project",
-    "success":      "JIRA issue created!"
-  },
-
-  "global": {
-    "back":       "Back",
-    "submit":     "Submit",
-    "submitting": "Submitting..."
-  },
-
-  "issue": {
-    "notice": "This ticket is related to the following issue in JIRA"
-  },
-
-  "login": {
-    "failed":   "Login failed",
-    "success":  "Successfully logged in! Loading projects..."
-  },
-
-  "problem": "There's been a problem: {{error}}"
+  "unshared": {
+    "isUnshared": "This ticket is not currently associated with a JIRA issue.",
+    "selectToShare": "Select your JIRA agreement from the \"Share\" menu."
+  }
 }
