@@ -1,10 +1,52 @@
-section[data-main] {
+.unshared {
   color: #545454;
   padding: 10px 25px;
   text-align: center;
 
   p + p {
     margin-top: 1em;
+  }
+}
+
+.share {
+  p, label { padding: 12px; }
+
+  label {
+    font-weight: bold;
+
+    input, select {
+      font-weight: normal;
+      margin-top: 10px;
+      width: 90%;
+    }
+  }
+
+  p + fieldset { margin-top: 1em; }
+
+  fieldset.grouped {
+    background-color: #f2f2f2;
+    border-radius: 4px;
+  }
+
+  .divider {
+    display: block;
+    margin-top: 12px;
+    text-align: center;
+
+    .text {
+      background: #fff;
+      display: inline-block;
+      font-weight: bold;
+      padding: 0 10px;
+      z-index: 2;
+    }
+
+    &:after {
+      border-top: 1px dotted #ccc;
+      content: "";
+      display: block;
+      margin-top: -7px;
+    }
   }
 }
 

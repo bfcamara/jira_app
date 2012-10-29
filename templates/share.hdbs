@@ -1,0 +1,30 @@
+<form target="#/jira/share" class='share'>
+  <p>{{t "share.info"}}</p>
+
+  <fieldset class='grouped'>
+    <label>
+      {{t "share.project.label"}}
+      <select name='project_id'>
+        <option>{{t "share.project.prompt"}}</option>
+      </select>
+    </label>
+
+    <label>
+      {{t "share.story_type.label"}}
+      <select name='story_type_id'>
+        <option>{{t "share.story_type.prompt"}}</option>
+      </select>
+    </label>
+  </fieldset>
+
+  <span class='divider'>
+    <span class='text'>{{t "share.or"}}}</span>
+  </span>
+
+  <fieldset>
+    <label>
+      {{t "share.story_id.label"}}
+      <input type="text" name="story_id" />
+    </label>
+  </fieldset>
+</form>

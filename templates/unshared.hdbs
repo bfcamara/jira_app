@@ -1,2 +1,4 @@
-<p>{{t "unshared.isUnshared"}}</p>
-<p>{{t "unshared.selectToShare"}}</p>
+<div class='unshared'>
+  <p>{{t "unshared.isUnshared"}}</p>
+  <p>{{t "unshared.selectToShare"}}</p>
+</div>

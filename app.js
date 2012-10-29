@@ -4,11 +4,23 @@
     defaultState: 'loading',
 
     events: {
-      'app.activated': 'onActivated'
+      'app.activated':              'checkSharedWith',
+      'ticket.sharedWith.changed':  'checkSharedWith'
     },
 
-    onActivated: function() {
-      this.switchTo('unshared');
+    checkSharedWith: function() {
+      if ( this.sharedWithJIRA() ) {
+        this.switchTo('share');
+      } else {
+        this.switchTo('unshared');
+      }
+    },
+
+    sharedWithJIRA: function() {
+      var sharedWith = this.ticket().sharedWith();
+      return sharedWith !== null &&
+             sharedWith.length === 1 &&
+             sharedWith[0].partnerName() === 'jira';
     }
   };
 

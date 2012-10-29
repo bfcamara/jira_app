@@ -5,6 +5,25 @@
 
   "loading": "Loading...",
 
+  "share": {
+    "info": "Tell us where in JIRA you would like this ticket to be placed. When you submit this ticket update, we'll send it over to JIRA.",
+    "or": "OR",
+
+    "project": {
+      "label": "Which project should this go to?",
+      "prompt": "Please choose"
+    },
+
+    "story_type": {
+      "label": "What type of story should this be?",
+      "prompt": "Please choose"
+    },
+
+    "story_id": {
+      "label": "Associate this with a specific story ID"
+    }
+  },
+
   "unshared": {
     "isUnshared": "This ticket is not currently associated with a JIRA issue.",
     "selectToShare": "Select your JIRA agreement from the \"Share\" menu."
