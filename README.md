@@ -1,5 +1,8 @@
-## Zendesk JIRA App
+## Zendesk JIRA App - Classic Version
 
-This is the JIRA app for New Zendesk. It is available to all Zendesk
-accounts in the apps listing. Please submit bug reports to
+This is the *old* version of the JIRA app. Use this version if you're hosting
+an older version of JIRA. It is *not* available on Zendesk Apps. You'll have
+to upload this as a private app.
+
+Please submit bug reports to
 [Zendesk](https://support.zendesk.com/requests/new). Pull requests are welcome.
