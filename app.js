@@ -35,14 +35,9 @@
     },
 
     onDetailsFetched: function(results) {
-      if (results.length === 1) {
-        var details = results[0];
-        details.ASSIGNEE   = details.ASSIGNEE   || this.I18n.t('details.assignee.none');
-        details.RESOLUTION = details.RESOLUTION || this.I18n.t('details.resolution.none');
-        this.switchTo('details', details);
-      } else {
-        this.checkSharingWith();
-      }
+      var details = this._parseDetails(results);
+      if ( details != null ) { this.switchTo('details', details); }
+      else { this.checkSharingWith(); }
     },
 
     checkSharingWith: function() {
@@ -97,6 +92,16 @@
         result += helpers.fmt(optionTemplate, type.id, type.name);
       });
       return helpers.safeString( result );
+    },
+
+    _parseDetails: function(results) {
+      if (results && results.length === 1) {
+        var details = results[0];
+        details.ASSIGNEE   = details.ASSIGNEE   || this.I18n.t('details.assignee.none');
+        details.RESOLUTION = details.RESOLUTION || this.I18n.t('details.status.none');
+        return details;
+      }
+      return null;
     }
   };
 
