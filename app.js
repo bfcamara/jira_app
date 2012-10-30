@@ -4,14 +4,22 @@
     defaultState: 'loading',
 
     events: {
-      'app.activated':                    'checkSharedWith',
-      'ticket.sharedWith.changed':        'checkSharedWith',
+      'app.activated %loading':           'checkAlreadyShared',
+      'ticket.sharedWith.changed':        'checkSharingWith',
 
+      'fetchDetails.done':                'onDetailsFetched',
+      'fetchDetails.fail':                'checkSharingWith',
       'fetchProjects.done':               'onProjectsFetched',
       'change select[name="project_id"]': 'onProjectSelected'
     },
 
     requests: {
+      fetchDetails: function(ticketID) {
+        return {
+          url: helpers.fmt('/tickets/%@/jira_ticket_details', ticketID)
+        };
+      },
+
       fetchProjects: function(agreementID) {
         return {
           url: helpers.fmt('/sharing_agreements/%@/jira_projects', agreementID)
@@ -19,7 +27,22 @@
       }
     },
 
-    checkSharedWith: function() {
+    checkAlreadyShared: function() {
+      this.ajax( 'fetchDetails', this.ticket().id() );
+    },
+
+    onDetailsFetched: function(results) {
+      if (results.length === 1) {
+        var details = results[0];
+        details.ASSIGNEE   = details.ASSIGNEE   || this.I18n.t('details.assignee.none');
+        details.RESOLUTION = details.RESOLUTION || this.I18n.t('details.resolution.none');
+        this.switchTo('details', details);
+      } else {
+        this.checkSharingWith();
+      }
+    },
+
+    checkSharingWith: function() {
       var agreementID = this.sharedWithJiraId();
       if ( agreementID != null ) {
         this.ajax('fetchProjects', agreementID);

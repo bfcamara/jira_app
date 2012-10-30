@@ -5,6 +5,24 @@
 
   "loading": "Loading...",
 
+  "details": {
+    "info": "Your ticket is now linked with JIRA.",
+
+    "issue": {
+      "label": "Issue"
+    },
+
+    "status": {
+      "label": "Status",
+      "none": "-"
+    },
+
+    "assignee": {
+      "label": "Assignee",
+      "none": "-"
+    }
+  },
+
   "share": {
     "info": "Tell us where in JIRA you would like this ticket to be placed. When you submit this ticket update, we'll send it over to JIRA.",
     "or": "OR",

@@ -1,0 +1,14 @@
+<div class='details'>
+  <p>{{t "details.info"}}</p>
+
+  <dl>
+    <dt>{{t "details.issue.label"}}</dt>
+    <dd><a href="{{URL}}">{{KEY}}</a></dd>
+
+    <dt>{{t "details.status.label"}}</dt>
+    <dd>{{RESOLUTION}}</dd>
+
+    <dt>{{t "details.assignee.label"}}</dt>
+    <dd>{{ASSIGNEE}}</dd>
+  </dl>
+</div>
