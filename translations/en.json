@@ -8,6 +8,8 @@
   "details": {
     "info": "Your ticket is now linked with JIRA.",
 
+    "errorFetching": "JIRA details are currently unavailable.",
+
     "issue": {
       "label": "Issue"
     },

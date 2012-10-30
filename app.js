@@ -36,8 +36,7 @@
 
     onDetailsFetched: function(results) {
       var details = this._parseDetails(results);
-      if ( details != null ) { this.switchTo('details', details); }
-      else { this.checkSharingWith(); }
+      this.switchTo('details', details);
     },
 
     checkSharingWith: function() {

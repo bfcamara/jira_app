@@ -1,14 +1,18 @@
 <div class='details'>
-  <p>{{t "details.info"}}</p>
+  {{#if KEY}}
+    <p>{{t "details.info"}}</p>
 
-  <dl>
-    <dt>{{t "details.issue.label"}}</dt>
-    <dd><a href="{{URL}}">{{KEY}}</a></dd>
+    <dl>
+      <dt>{{t "details.issue.label"}}</dt>
+      <dd><a href="{{URL}}">{{KEY}}</a></dd>
 
-    <dt>{{t "details.status.label"}}</dt>
-    <dd>{{RESOLUTION}}</dd>
+      <dt>{{t "details.status.label"}}</dt>
+      <dd>{{RESOLUTION}}</dd>
 
-    <dt>{{t "details.assignee.label"}}</dt>
-    <dd>{{ASSIGNEE}}</dd>
-  </dl>
+      <dt>{{t "details.assignee.label"}}</dt>
+      <dd>{{ASSIGNEE}}</dd>
+    </dl>
+  {{else}}
+    <p>{{t "details.errorFetching"}}</p>
+  {{/if}}
 </div>
