@@ -13,7 +13,8 @@
       'fetchDetails.done':                'onDetailsFetched',
       'fetchDetails.fail':                'checkSharingWith',
       'fetchProjects.done':               'onProjectsFetched',
-      'change select[name="project_id"]': 'onProjectSelected'
+      'change select[name="project_id"]': 'onProjectSelected',
+      'change input,select':              'onSharingInfoChanged'
     },
 
     requests: {
@@ -68,6 +69,13 @@
       this.selectedProjectID = this.$(e.target).val();
       this.$('select[name="issue_type_id"]')
           .html( '' + this.storyTypeOptions() );
+    },
+
+    onSharingInfoChanged: function(e) {
+      var sharingOptions = this.ticket().sharingAgreementOptions() || {},
+          $e = this.$(e.target);
+      sharingOptions[ $e.attr('name') ] = $e.val();
+      this.ticket().sharingAgreementOptions( sharingOptions );
     },
 
     storyTypesForCurrentProject: function() {
