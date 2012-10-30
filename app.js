@@ -43,6 +43,7 @@
       var agreementID = this.sharedWithJiraId();
       if ( agreementID != null ) {
         this.ajax('fetchProjects', agreementID);
+        this.switchTo('fetchingProjects');
       } else {
         this.switchTo('unshared');
       }

@@ -5,6 +5,8 @@
 
   "loading": "Loading...",
 
+  "fetchingProjects": "Fetching JIRA project information...",
+
   "details": {
     "info": "Your ticket is now linked with JIRA.",
 
