@@ -14,7 +14,7 @@
 
     <label>
       {{t "share.story_type.label"}}
-      <select name='story_type_id'>
+      <select name='issue_type_id'>
         {{storyTypeOptions}}
       </select>
     </label>
@@ -27,7 +27,7 @@
   <fieldset>
     <label>
       {{t "share.story_id.label"}}
-      <input type="text" name="story_id" />
+      <input type="text" name="issue_key" />
     </label>
   </fieldset>
 </form>

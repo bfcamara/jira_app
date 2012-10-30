@@ -66,7 +66,7 @@
 
     onProjectSelected: function(e) {
       this.selectedProjectID = this.$(e.target).val();
-      this.$('select[name="story_type_id"]')
+      this.$('select[name="issue_type_id"]')
           .html( '' + this.storyTypeOptions() );
     },
 
