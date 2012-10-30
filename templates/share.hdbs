@@ -6,6 +6,9 @@
       {{t "share.project.label"}}
       <select name='project_id'>
         <option>{{t "share.project.prompt"}}</option>
+        {{#projects}}
+          <option value="{{id}}">{{name}}</option>
+        {{/projects}}
       </select>
     </label>
 
