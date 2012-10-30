@@ -1,5 +1,8 @@
 (function() {
 
+  var DETAILS_URL  = '/tickets/%@/jira_ticket_details',
+      PROJECTS_URL = '/sharing_agreements/%@/jira_projects';
+
   return {
     defaultState: 'loading',
 
@@ -16,13 +19,13 @@
     requests: {
       fetchDetails: function(ticketID) {
         return {
-          url: helpers.fmt('/tickets/%@/jira_ticket_details', ticketID)
+          url: helpers.fmt(DETAILS_URL, ticketID)
         };
       },
 
       fetchProjects: function(agreementID) {
         return {
-          url: helpers.fmt('/sharing_agreements/%@/jira_projects', agreementID)
+          url: helpers.fmt(PROJECTS_URL, agreementID)
         };
       }
     },
