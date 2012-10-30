@@ -15,7 +15,7 @@
     <label>
       {{t "share.story_type.label"}}
       <select name='story_type_id'>
-        <option>{{t "share.story_type.prompt"}}</option>
+        {{storyTypeOptions}}
       </select>
     </label>
   </fieldset>
