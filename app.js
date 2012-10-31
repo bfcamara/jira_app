@@ -8,49 +8,45 @@
   function Projects(app, agreementID) {
     var self = this;
     this.app = app;
-    this._projects = [];
-    this.projectOptions = [];
-    this.issueTypeOptions = [];
+    this._projectOptions = [];
+    this._issueTypeOptions = {};
     app.ajax('fetchProjects', agreementID);
   }
 
   Projects.prototype = {
     setData: function(projects) {
-      this._projects = projects;
-
-      this.projectOptions = _.map(projects, function(p) {
+      this._projectOptions = _.map(projects, function(p) {
         return { value: p.id, text: p.name };
       });
+
+      this._issueTypeOptions = _.inject(projects, function(memo, p) {
+        memo[ p.id ] = _.map(p.issueTypes, function(it) {
+          return { value: it.id, text: it.name };
+        });
+        return memo;
+      }, {});
     },
 
     chooseProject: function(projectID) {
-      this.issueTypeOptions = this.issueTypeOptionsFor(projectID);
+      this.selectedProjectID = projectID;
     },
 
-    issueTypeOptionsFor: function(projectID) {
-      var project = this.projectByID(projectID);
-      return project == null ? [] : _.map(project.issueTypes, function(it) {
-               return { value: it.id, text: it.name };
-             });
-    },
+    projectOptions: function() { return this._projectOptions; },
 
-    projectByID: function(projectID) {
-      return ( this._projects == null || projectID == null ) ? null :
-             _.find(this._projects, function(p) {
-               return p.id === projectID;
-             });
+    issueTypeOptions: function() {
+      return this._issueTypeOptions[ this.selectedProjectID ] || [];
     },
 
     // Returns the list of projects as a <select>
     projectsSelect: function() {
       var prompt = this.app.I18n.t('share.project.prompt');
-      return this.renderSelect('project_id', prompt, this.projectOptions);
+      return this.renderSelect('project_id', prompt, this.projectOptions());
     },
 
     // Returns the list of issue types as a <select>
     issueTypesSelect: function() {
       var prompt = this.app.I18n.t('share.story_type.prompt');
-      return this.renderSelect('issue_type_id', prompt, this.issueTypeOptions);
+      return this.renderSelect('issue_type_id', prompt, this.issueTypeOptions());
     },
 
     renderSelect: function(name, prompt, options) {
