@@ -1,7 +1,8 @@
 (function() {
 
-  var DETAILS_URL  = '/tickets/%@/jira_ticket_details',
-      PROJECTS_URL = '/sharing_agreements/%@/jira_projects';
+  var DETAILS_URL     = '/tickets/%@/jira_ticket_details',
+      PROJECTS_URL    = '/sharing_agreements/%@/jira_projects',
+      OPTION_TEMPLATE = '<option value="%@">%@</option>';
 
   return {
     defaultState: 'loading',
@@ -93,11 +94,10 @@
       // Handlebars (1.0.beta.2) can't render templates that end in
       // {{#foos}}...{{/foos}} blocks. As soon as Lotus upgrades to Ember 1.0,
       // it can upgrade Handlebars, and we can replace this with a template.
-      var optionTemplate = '<option value="%@">%@</option>',
-          result = '';
-      result += helpers.fmt(optionTemplate, '', this.I18n.t('share.story_type.prompt'));
+      var result = '';
+      result += helpers.fmt(OPTION_TEMPLATE, '', this.I18n.t('share.story_type.prompt'));
       this.storyTypesForCurrentProject().forEach(function(type) {
-        result += helpers.fmt(optionTemplate, type.id, type.name);
+        result += helpers.fmt(OPTION_TEMPLATE, type.id, type.name);
       });
       return helpers.safeString( result );
     },
