@@ -4,6 +4,63 @@
       PROJECTS_URL    = '/sharing_agreements/%@/jira_projects',
       OPTION_TEMPLATE = '<option value="%@">%@</option>';
 
+  // Data object for the list of available projects
+  function Projects(app, agreementID) {
+    var self = this;
+    this.app = app;
+    this._projects = [];
+    this.projectOptions = [];
+    this.issueTypeOptions = [];
+    app.ajax('fetchProjects', agreementID);
+  }
+
+  Projects.prototype = {
+    setData: function(projects) {
+      this._projects = projects;
+
+      this.projectOptions = _.map(projects, function(p) {
+        return { value: p.id, text: p.name };
+      });
+    },
+
+    chooseProject: function(projectID) {
+      this.issueTypeOptions = this.issueTypeOptionsFor(projectID);
+    },
+
+    issueTypeOptionsFor: function(projectID) {
+      var project = this.projectByID(projectID);
+      return project == null ? [] : _.map(project.issueTypes, function(it) {
+               return { value: it.id, text: it.name };
+             });
+    },
+
+    projectByID: function(projectID) {
+      return ( this._projects == null || projectID == null ) ? null :
+             _.find(this._projects, function(p) {
+               return p.id === projectID;
+             });
+    },
+
+    // Returns the list of projects as a <select>
+    projectsSelect: function() {
+      var prompt = this.app.I18n.t('share.project.prompt');
+      return this.renderSelect('project_id', prompt, this.projectOptions);
+    },
+
+    // Returns the list of issue types as a <select>
+    issueTypesSelect: function() {
+      var prompt = this.app.I18n.t('share.story_type.prompt');
+      return this.renderSelect('issue_type_id', prompt, this.issueTypeOptions);
+    },
+
+    renderSelect: function(name, prompt, options) {
+      return helpers.safeString(this.app.renderTemplate('select', {
+        name: name,
+        options: [ { value: "", text: prompt } ].concat(options)
+      }));
+    }
+  };
+
   return {
     defaultState: 'loading',
 
@@ -44,7 +101,7 @@
     checkSharingWith: function() {
       var agreementID = this.sharedWithJiraId();
       if ( agreementID != null ) {
-        this.ajax('fetchProjects', agreementID);
+        this.projects = new Projects(this, agreementID);
         this.switchTo('fetchingProjects');
       } else {
         this.switchTo('unshared');
@@ -62,14 +119,15 @@
     },
 
     onProjectsFetched: function(projects) {
-      this.projects = projects;
-      this.switchTo('share', this);
+      this.projects.setData(projects);
+      this.switchTo('share', this.projects);
     },
 
     onProjectSelected: function(e) {
-      this.selectedProjectID = this.$(e.target).val();
-      this.$('select[name="issue_type_id"]')
-          .html( '' + this.storyTypeOptions() );
+      this.projects.chooseProject( this.$(e.target).val() );
+      this.$('select[name="issue_type_id"]').replaceWith(
+        this.projects.issueTypesSelect().toString()
+      );
     },
 
     onSharingInfoChanged: function(e) {
@@ -77,29 +135,6 @@
           $e = this.$(e.target);
       sharingOptions[ $e.attr('name') ] = $e.val();
       this.ticket().sharingAgreementOptions( sharingOptions );
-    },
-
-    storyTypesForCurrentProject: function() {
-      if ( this.projects == null || this.selectedProjectID == null ) {
-        return [];
-      }
-      var project = _.find(this.projects, function(p) {
-        return p.id === this.selectedProjectID;
-      }, this);
-      return project == null ? [] : project.issueTypes;
-    },
-
-    storyTypeOptions: function() {
-      // This should really be a template, but Lotus's current version of
-      // Handlebars (1.0.beta.2) can't render templates that end in
-      // {{#foos}}...{{/foos}} blocks. As soon as Lotus upgrades to Ember 1.0,
-      // it can upgrade Handlebars, and we can replace this with a template.
-      var result = '';
-      result += helpers.fmt(OPTION_TEMPLATE, '', this.I18n.t('share.story_type.prompt'));
-      this.storyTypesForCurrentProject().forEach(function(type) {
-        result += helpers.fmt(OPTION_TEMPLATE, type.id, type.name);
-      });
-      return helpers.safeString( result );
     },
 
     _parseDetails: function(results) {

@@ -1,0 +1,5 @@
+<select name="{{name}}">
+  {{#options}}
+    <option value="{{value}}">{{text}}</option>
+  {{/options}}
+</select>

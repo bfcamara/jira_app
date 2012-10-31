@@ -4,19 +4,13 @@
   <fieldset class='grouped'>
     <label>
       {{t "share.project.label"}}
-      <select name='project_id'>
-        <option value="">{{t "share.project.prompt"}}</option>
-        {{#projects}}
-          <option value="{{id}}">{{name}}</option>
-        {{/projects}}
+      {{projectsSelect}}
       </select>
     </label>
 
     <label>
       {{t "share.story_type.label"}}
-      <select name='issue_type_id'>
-        {{storyTypeOptions}}
-      </select>
+      {{issueTypesSelect}}
     </label>
   </fieldset>
 
