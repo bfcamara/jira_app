@@ -35,25 +35,6 @@
 
     issueTypeOptions: function() {
       return this._issueTypeOptions[ this.selectedProjectID ] || [];
-    },
-
-    // Returns the list of projects as a <select>
-    projectsSelect: function() {
-      var prompt = this.app.I18n.t('share.project.prompt');
-      return this.renderSelect('project_id', prompt, this.projectOptions());
-    },
-
-    // Returns the list of issue types as a <select>
-    issueTypesSelect: function() {
-      var prompt = this.app.I18n.t('share.story_type.prompt');
-      return this.renderSelect('issue_type_id', prompt, this.issueTypeOptions());
-    },
-
-    renderSelect: function(name, prompt, options) {
-      return helpers.safeString(this.app.renderTemplate('select', {
-        name: name,
-        options: [ { value: "", text: prompt } ].concat(options)
-      }));
     }
   };
 
@@ -116,13 +97,13 @@
 
     onProjectsFetched: function(projects) {
       this.projects.setData(projects);
-      this.switchTo('share', this.projects);
+      this.switchTo('share', this);
     },
 
     onProjectSelected: function(e) {
       this.projects.chooseProject( this.$(e.target).val() );
       this.$('select[name="issue_type_id"]').replaceWith(
-        this.projects.issueTypesSelect().toString()
+        this.issueTypesSelect().toString()
       );
     },
 
@@ -141,6 +122,25 @@
         return details;
       }
       return null;
+    },
+
+    // Returns the list of projects as a <select>
+    projectsSelect: function() {
+      var prompt = this.I18n.t('share.project.prompt');
+      return this.renderSelect('project_id', prompt, this.projects.projectOptions());
+    },
+
+    // Returns the list of issue types as a <select>
+    issueTypesSelect: function() {
+      var prompt = this.I18n.t('share.story_type.prompt');
+      return this.renderSelect('issue_type_id', prompt, this.projects.issueTypeOptions());
+    },
+
+    renderSelect: function(name, prompt, options) {
+      return helpers.safeString(this.renderTemplate('select', {
+        name: name,
+        options: [ { value: "", text: prompt } ].concat(options)
+      }));
     }
   };
 
