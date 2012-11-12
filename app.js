@@ -80,8 +80,11 @@
       if ( agreementID != null ) {
         this.projects = new Projects(this, agreementID);
         this.switchTo('fetchingProjects');
+        services.appsTray().show();
+        this.highlightApp(true);
       } else {
         this.switchTo('unshared');
+        this.highlightApp(false);
       }
     },
 
@@ -141,6 +144,18 @@
         name: name,
         options: [ { value: "", text: prompt } ].concat(options)
       }));
+    },
+
+    highlightApp: function(status) {
+      var self = this,
+          elem = self.$("section");
+
+      if (status === true) {
+        elem.addClass('highlight');
+        setTimeout(function() { self.highlightApp(false); }, 3000);
+      } else {
+        elem.removeClass('highlight');
+      }
     }
   };
 
