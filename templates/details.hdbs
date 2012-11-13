@@ -4,7 +4,7 @@
 
     <dl>
       <dt>{{t "details.issue.label"}}</dt>
-      <dd><a href="{{URL}}">{{KEY}}</a></dd>
+      <dd><a href="{{URL}}" target="_blank">{{KEY}}</a></dd>
 
       <dt>{{t "details.status.label"}}</dt>
       <dd>{{RESOLUTION}}</dd>
