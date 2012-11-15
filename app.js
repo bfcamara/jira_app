@@ -2,7 +2,8 @@
 
   var DETAILS_URL     = '/tickets/%@/jira_ticket_details',
       PROJECTS_URL    = '/sharing_agreements/%@/jira_projects',
-      OPTION_TEMPLATE = '<option value="%@">%@</option>';
+      OPTION_TEMPLATE = '<option value="%@">%@</option>',
+      CHECKED_DETAILS = false;
 
   // Data object for the list of available projects
   function Projects(app, agreementID) {
@@ -72,12 +73,13 @@
 
     onDetailsFetched: function(results) {
       var details = this._parseDetails(results);
+      CHECKED_DETAILS = true;
       this.switchTo('details', details);
     },
 
     checkSharingWith: function() {
       var agreementID = this.sharedWithJiraId();
-      if ( agreementID != null ) {
+      if ( agreementID != null && CHECKED_DETAILS !== false && this.currentState != 'details' ) {
         this.projects = new Projects(this, agreementID);
         this.switchTo('fetchingProjects');
         services.appsTray().show();
