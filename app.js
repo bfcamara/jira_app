@@ -39,6 +39,7 @@
   };
 
   return {
+
     defaultState: 'loading',
 
     events: {
@@ -77,12 +78,12 @@
 
     checkSharingWith: function() {
       var agreementID = this.sharedWithJiraId();
-      if ( agreementID != null ) {
+      if ( agreementID != null && this.currentState != 'loading' && this.currentState != 'details' ) {
         this.projects = new Projects(this, agreementID);
         this.switchTo('fetchingProjects');
         services.appsTray().show();
         this.highlightApp(true);
-      } else {
+      } else if (agreementID === null && this.currentState == 'loading' || this.currentState == 'share') {
         this.switchTo('unshared');
         this.highlightApp(false);
       }
