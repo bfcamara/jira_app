@@ -1,6 +1,6 @@
 (function() {
 
-  var DETAILS_URL     = '/tickets/%@/jira_ticket_details',
+  var DETAILS_URL     = '/api/v2/tickets/%@/jira.json',
       PROJECTS_URL    = '/sharing_agreements/%@/jira_projects',
       OPTION_TEMPLATE = '<option value="%@">%@</option>';
 
@@ -68,12 +68,16 @@
     },
 
     checkAlreadyShared: function() {
-      this.ajax( 'fetchDetails', this.ticket().id() );
+      this.ajax('fetchDetails', this.ticket().id());
     },
 
     onDetailsFetched: function(results) {
       var details = this._parseDetails(results);
-      this.switchTo('details', details);
+      if (details) {
+        this.switchTo('details', details);
+      } else {
+        this.switchTo('unshared');
+      }
     },
 
     checkSharingWith: function() {
