@@ -1,7 +1,7 @@
 (function() {
 
   var DETAILS_URL     = '/api/v2/tickets/%@/jira.json',
-      PROJECTS_URL    = '/sharing_agreements/%@/jira_projects',
+      PROJECTS_URL    = '/api/v2/sharing_agreements/%@/jira.json',
       OPTION_TEMPLATE = '<option value="%@">%@</option>';
 
   // Data object for the list of available projects
