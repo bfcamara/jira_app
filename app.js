@@ -40,8 +40,6 @@
 
   return {
 
-    timer: null,
-
     defaultState: 'loading',
 
     events: {
@@ -52,7 +50,7 @@
       'fetchDetails.fail':                'checkSharingWith',
       'fetchProjects.done':               'onProjectsFetched',
       'change select[name="project_id"]': 'onProjectSelected',
-      'keyup input,select':               'onSharingInfoChanged'
+      'change input,select':              'onSharingInfoChanged'
     },
 
     requests: {
@@ -118,15 +116,10 @@
     },
 
     onSharingInfoChanged: function(e) {
-      var self = this;
-      clearTimeout( self.timer );
-
-      self.timer = setTimeout(function() {
-        var sharingOptions = self.ticket().sharingAgreementOptions() || {},
-            $e = self.$(e.target);
-        sharingOptions[ $e.attr('name') ] = $e.val();
-        self.ticket().sharingAgreementOptions( sharingOptions );
-      }, 400);
+      var sharingOptions = this.ticket().sharingAgreementOptions() || {},
+          $e = this.$(e.target);
+      sharingOptions[ $e.attr('name') ] = $e.val();
+      this.ticket().sharingAgreementOptions( sharingOptions );
     },
 
     _parseDetails: function(results) {
