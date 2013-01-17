@@ -52,7 +52,10 @@
       'fetchDetails.fail':                'checkSharingWith',
       'fetchProjects.done':               'onProjectsFetched',
       'change select[name="project_id"]': 'onProjectSelected',
-      'keyup input,select':               'onSharingInfoChanged'
+      'change input,select':              'onSharingInfoChanged',
+      'input input,select':               'onSharingInfoChanged',
+      'keyup input,select':               'onSharingInfoChanged',
+      'paste input,select':               'onSharingInfoChanged'
     },
 
     requests: {
@@ -117,6 +120,7 @@
       );
     },
 
+<<<<<<< HEAD
     onSharingInfoChanged: function(e) {
       var self = this;
       clearTimeout( self.timer );
@@ -128,6 +132,14 @@
         self.ticket().sharingAgreementOptions( sharingOptions );
       }, 400);
     },
+=======
+    onSharingInfoChanged: _.debounce(function(e) {
+      var sharingOptions = this.ticket().sharingAgreementOptions() || {},
+          $e = this.$(e.target);
+      sharingOptions[ $e.attr('name') ] = $e.val();
+      this.ticket().sharingAgreementOptions( sharingOptions );
+    }, 400),
+>>>>>>> Changed sharing info event to a delayed change,keyup,input and paste
 
     _parseDetails: function(results) {
       if (results && results.length === 1) {
