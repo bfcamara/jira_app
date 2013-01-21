@@ -40,6 +40,8 @@
 
   return {
 
+    timer: null,
+
     defaultState: 'loading',
 
     events: {
@@ -50,7 +52,10 @@
       'fetchDetails.fail':                'checkSharingWith',
       'fetchProjects.done':               'onProjectsFetched',
       'change select[name="project_id"]': 'onProjectSelected',
-      'change input,select':              'onSharingInfoChanged'
+      'change input,select':              'onSharingInfoChanged',
+      'input input,select':               'onSharingInfoChanged',
+      'keyup input,select':               'onSharingInfoChanged',
+      'paste input,select':               'onSharingInfoChanged'
     },
 
     requests: {
@@ -115,12 +120,12 @@
       );
     },
 
-    onSharingInfoChanged: function(e) {
+    onSharingInfoChanged: _.debounce(function(e) {
       var sharingOptions = this.ticket().sharingAgreementOptions() || {},
           $e = this.$(e.target);
       sharingOptions[ $e.attr('name') ] = $e.val();
       this.ticket().sharingAgreementOptions( sharingOptions );
-    },
+    }, 400),
 
     _parseDetails: function(results) {
       if (results && results.length === 1) {
