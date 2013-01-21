@@ -120,26 +120,12 @@
       );
     },
 
-<<<<<<< HEAD
-    onSharingInfoChanged: function(e) {
-      var self = this;
-      clearTimeout( self.timer );
-
-      self.timer = setTimeout(function() {
-        var sharingOptions = self.ticket().sharingAgreementOptions() || {},
-            $e = self.$(e.target);
-        sharingOptions[ $e.attr('name') ] = $e.val();
-        self.ticket().sharingAgreementOptions( sharingOptions );
-      }, 400);
-    },
-=======
     onSharingInfoChanged: _.debounce(function(e) {
       var sharingOptions = this.ticket().sharingAgreementOptions() || {},
           $e = this.$(e.target);
       sharingOptions[ $e.attr('name') ] = $e.val();
       this.ticket().sharingAgreementOptions( sharingOptions );
     }, 400),
->>>>>>> Changed sharing info event to a delayed change,keyup,input and paste
 
     _parseDetails: function(results) {
       if (results && results.length === 1) {
