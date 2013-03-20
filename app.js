@@ -335,7 +335,7 @@
       Object.keys(data).forEach(function(key) {
         data[key] = helpers.safeString( data[key] );
       });
-      return encodeURI( this.renderTemplate(templateName, data) );
+      return this.renderTemplate(templateName, data);
     }
 
   };
