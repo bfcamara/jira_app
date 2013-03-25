@@ -102,7 +102,7 @@
       var sharedWith = this.ticket().sharedWith();
       if ( sharedWith == null ||
            sharedWith.length !== 1 ||
-           sharedWith[0].partnerName() !== 'jira' ) {
+           sharedWith[0].name().indexOf("JIRA @") == -1 ) {
         return null;
       }
       return sharedWith[0].id();
