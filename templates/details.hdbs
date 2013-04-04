@@ -7,6 +7,9 @@
       <dd><a href="{{URL}}" target="_blank">{{KEY}}</a></dd>
 
       <dt>{{t "details.status.label"}}</dt>
+      <dd>{{STATUS}}</dd>
+
+      <dt>{{t "details.resolution.label"}}</dt>
       <dd>{{RESOLUTION}}</dd>
 
       <dt>{{t "details.assignee.label"}}</dt>

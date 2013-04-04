@@ -131,7 +131,8 @@
       if (results && results.length === 1) {
         var details = results[0];
         details.ASSIGNEE   = details.ASSIGNEE   || this.I18n.t('details.assignee.none');
-        details.RESOLUTION = details.RESOLUTION || this.I18n.t('details.status.none');
+        details.RESOLUTION = details.RESOLUTION || this.I18n.t('details.resolution.none');
+        details.STATUS     = details.STATUS     || this.I18n.t('details.status.none');
         return details;
       }
       return null;

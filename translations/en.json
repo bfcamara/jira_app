@@ -16,6 +16,11 @@
       "label": "Issue"
     },
 
+    "resolution": {
+      "label": "Resolution",
+      "none": "-"
+    },
+
     "status": {
       "label": "Status",
       "none": "-"
