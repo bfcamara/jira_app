@@ -73,7 +73,11 @@
     },
 
     checkAlreadyShared: function() {
-      this.ajax('fetchDetails', this.ticket().id());
+      if (this.currentLocation() === 'ticket_sidebar') {
+        this.ajax('fetchDetails', this.ticket().id());
+      } else {
+        this.switchTo('unshared');
+      }
     },
 
     onDetailsFetched: function(results) {
