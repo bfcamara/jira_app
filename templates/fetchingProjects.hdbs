@@ -1,1 +1,3 @@
-{{t "fetchingProjects"}}
+<div class="loading">
+  <p>{{t "fetchingProjects"}}</p>
+</div>

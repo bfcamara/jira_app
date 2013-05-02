@@ -1,1 +1,3 @@
-<p>{{t "loading"}}</p>
+<div class="loading">
+  <p>{{t "loading"}}</p>
+</div>
