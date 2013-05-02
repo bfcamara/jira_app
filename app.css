@@ -10,6 +10,21 @@ section.highlight {
   background-color: #FCF8E3;
 }
 
+.loading {
+
+  text-align: center;
+
+  &:before {
+    content: app-asset-url("dotted-bar.gif");
+    position: relative;
+    top: 5px;
+  }
+
+  p {
+    padding-top: 15px;
+  }
+}
+
 .unshared {
   color: #545454;
   padding: 10px 25px;
