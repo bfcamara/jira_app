@@ -58,7 +58,7 @@ parts:
       value: "Tell us where in JIRA you would like this ticket to be placed. When you submit this ticket update, we'll send it over to JIRA."
   - translation:
       key: "txt.apps.jira_app.share.or"
-      title: "to show the two options a user can have either share it to an existing JIRA issue or create a new one"
+      title: "to show the two options a user can have, either share it to an existing JIRA issue or create a new one"
       value: "OR"
   - translation:
       key: "txt.apps.jira_app.share.project.label"
@@ -87,5 +87,5 @@ parts:
   - translation:
       key: "txt.apps.jira_app.unshared.selectToShare"
       title: "Droplist for the admin to choose the JIRA instance to share with"
-      value: "Select your JIRA agreement from the "Share" menu."
+      value: "Select your JIRA agreement from the 'Share' menu."
 
