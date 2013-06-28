@@ -1,0 +1,91 @@
+title: "Jira App"
+packages:
+  - default
+  - app_jira_app
+
+parts:
+  - translation:
+      key: "txt.apps.jira_app.app.description"
+      title: "Description of the App for the admin who installs it"
+      value: "Shows related information from a linked JIRA ticket"
+  - translation:
+      key: "txt.apps.jira_app.loading"
+      title: "Loading..."
+      value: "Loading..."
+  - translation:
+      key: "txt.apps.jira_app.fetchingProjects"
+      title: "Wait text for when the App is making a search in JIRA, instead of just having the user wait we display this text"
+      value: "Fetching JIRA project information..."
+  - translation:
+      key: "txt.apps.jira_app.details.info"
+      title: "Success message for when a ticket has successfuly been linked with JIRA software"
+      value: "Your ticket is now linked with JIRA."
+  - translation:
+      key: "txt.apps.jira_app.details.errorFetching"
+      title: "Error message"
+      value: "JIRA details are currently unavailable."
+  - translation:
+      key: "txt.apps.jira_app.details.issue.label"
+      title: "Label of the JIRA task, it's called an issue in JIRA"
+      value: "Issue"
+  - translation:
+      key: "txt.apps.jira_app.details.resolution.label"
+      title: "Name of a field in JIRA called resolution"
+      value: "Resolution"
+  - translation:
+      key: "txt.apps.jira_app.details.resolution.none"
+      title: "What we display when there is no resolution"
+      value: "-"
+  - translation:
+      key: "txt.apps.jira_app.details.status.label"
+      title: "Name of a field in JIRA"
+      value: "Status"
+  - translation:
+      key: "txt.apps.jira_app.details.status.none"
+      title: "What we display when there is no value"
+      value: "-"
+  - translation:
+      key: "txt.apps.jira_app.details.assignee.label"
+      title: "Name of a field in JIRA"
+      value: "Assignee"
+  - translation:
+      key: "txt.apps.jira_app.details.assignee.none"
+      title: "What we display when there is no value"
+      value: "-"
+  - translation:
+      key: "txt.apps.jira_app.share.info"
+      title: "Text to explain to the user where he escalates that ticket in JIRA"
+      value: "Tell us where in JIRA you would like this ticket to be placed. When you submit this ticket update, we'll send it over to JIRA."
+  - translation:
+      key: "txt.apps.jira_app.share.or"
+      title: "to show the two options a user can have, either share it to an existing JIRA issue or create a new one"
+      value: "OR"
+  - translation:
+      key: "txt.apps.jira_app.share.project.label"
+      title: "simple question for the user of the app"
+      value: "Which project should this go to?"
+  - translation:
+      key: "txt.apps.jira_app.share.project.prompt"
+      title: "Prompting him to make a choice"
+      value: "Please choose"
+  - translation:
+      key: "txt.apps.jira_app.share.story_type.label"
+      title: "Dropdown of jira stories type, can be an incident a problem a question etc"
+      value: "What type of story should this be?"
+  - translation:
+      key: "txt.apps.jira_app.share.story_type.prompt"
+      title: "Prompting him to make a choice"
+      value: "Please choose"
+  - translation:
+      key: "txt.apps.jira_app.share.story_id.label"
+      title: "Let the user enter a specific story ID"
+      value: "Associate this with a specific story ID"
+  - translation:
+      key: "txt.apps.jira_app.unshared.isUnshared"
+      title: "Standard message when viewing a ticket in zendesk that hasn't been escalated to JIRA"
+      value: "This ticket is not currently associated with a JIRA issue."
+  - translation:
+      key: "txt.apps.jira_app.unshared.selectToShare"
+      title: "Droplist for the admin to choose the JIRA instance to share with"
+      value: "Select your JIRA agreement from the 'Share' menu."
+
