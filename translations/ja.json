@@ -1,0 +1,45 @@
+{
+  "app": {
+    "description": "リンクされたJIRAチケットから関連情報を表示します"
+  },
+  "loading": "読み込み中...",
+  "fetchingProjects": "JIRAプロジェクト情報を取得しています...",
+  "details": {
+    "info": "ご利用のチケットは現在JIRAにリンクされています。",
+    "errorFetching": "JIRAの詳細情報は現在利用できません。",
+    "issue": {
+      "label": "問題"
+    },
+    "resolution": {
+      "label": "解決策",
+      "none": "-"
+    },
+    "status": {
+      "label": "ステータス",
+      "none": "-"
+    },
+    "assignee": {
+      "label": "担当者",
+      "none": "-"
+    }
+  },
+  "share": {
+    "info": "JIRAのどこにこのチケットを置くかを教えてください。このチケットの更新を送信すると、JIRAに送られます。",
+    "or": "または",
+    "project": {
+      "label": "このチケットはどのプロジェクトに送信されますか?",
+      "prompt": "選択してください"
+    },
+    "story_type": {
+      "label": "これはどのタイプのstoryですか?",
+      "prompt": "選択してください"
+    },
+    "story_id": {
+      "label": "このチケットを特定のstory IDと関連付ける"
+    }
+  },
+  "unshared": {
+    "isUnshared": "このチケットは現在JIRAの問題と関連付けられていません。",
+    "selectToShare": "「Share」メニューからJIRA契約を選択してください。"
+  }
+}

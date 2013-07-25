@@ -1,0 +1,45 @@
+{
+  "app": {
+    "description": "Viser relaterede oplysninger fra en sammenkædet JIRA-ticket"
+  },
+  "loading": "Indlæser...",
+  "fetchingProjects": "Henter JIRA-projektoplysninger...",
+  "details": {
+    "info": "Din ticket er nu sammenkædet med JIRA.",
+    "errorFetching": "JIRA-detaljer er aktuelt ikke tilgængelige.",
+    "issue": {
+      "label": "Problem"
+    },
+    "resolution": {
+      "label": "Løsning",
+      "none": "-"
+    },
+    "status": {
+      "label": "Status",
+      "none": "-"
+    },
+    "assignee": {
+      "label": "Ansvarlig",
+      "none": "-"
+    }
+  },
+  "share": {
+    "info": "Fortæl os, hvor du vil have denne ticket placeret i JIRA. Når du sender denne ticket-opdatering, sender vi den over til JIRA.",
+    "or": "ELLER ",
+    "project": {
+      "label": "Hvilket projekt skal denne her sendes til?",
+      "prompt": "Vælg"
+    },
+    "story_type": {
+      "label": "Hvilken type historie skal det være?",
+      "prompt": "Vælg"
+    },
+    "story_id": {
+      "label": "Knyt den til et specifikt story ID"
+    }
+  },
+  "unshared": {
+    "isUnshared": "Denne ticket er aktuelt ikke knyttet til et JIRA-problem.",
+    "selectToShare": "Vælg din JIRA-aftale på menuen 'Del'."
+  }
+}

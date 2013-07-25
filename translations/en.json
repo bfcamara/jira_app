@@ -1,58 +1,45 @@
 {
   "app": {
-    "description":  "Shows related information from a linked JIRA ticket"
+    "description": "Shows related information from a linked JIRA ticket"
   },
-
   "loading": "Loading...",
-
   "fetchingProjects": "Fetching JIRA project information...",
-
   "details": {
     "info": "Your ticket is now linked with JIRA.",
-
     "errorFetching": "JIRA details are currently unavailable.",
-
     "issue": {
       "label": "Issue"
     },
-
     "resolution": {
       "label": "Resolution",
       "none": "-"
     },
-
     "status": {
       "label": "Status",
       "none": "-"
     },
-
     "assignee": {
       "label": "Assignee",
       "none": "-"
     }
   },
-
   "share": {
     "info": "Tell us where in JIRA you would like this ticket to be placed. When you submit this ticket update, we'll send it over to JIRA.",
     "or": "OR",
-
     "project": {
       "label": "Which project should this go to?",
       "prompt": "Please choose"
     },
-
     "story_type": {
       "label": "What type of story should this be?",
       "prompt": "Please choose"
     },
-
     "story_id": {
       "label": "Associate this with a specific story ID"
     }
   },
-
   "unshared": {
     "isUnshared": "This ticket is not currently associated with a JIRA issue.",
-    "selectToShare": "Select your JIRA agreement from the \"Share\" menu."
+    "selectToShare": "Select your JIRA agreement from the 'Share' menu."
   }
 }

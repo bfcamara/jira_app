@@ -1,0 +1,45 @@
+{
+  "app": {
+    "description": "Muestra la información relacionada de un ticket vinculado de JIRA"
+  },
+  "loading": "Cargando...",
+  "fetchingProjects": "Obteniendo información de proyecto de JIRA...",
+  "details": {
+    "info": "Su ticket está ahora vinculado con JIRA.",
+    "errorFetching": "Los detalles de JIRA no están disponibles por el momento.",
+    "issue": {
+      "label": "Problema"
+    },
+    "resolution": {
+      "label": "Resolución",
+      "none": "-"
+    },
+    "status": {
+      "label": "Estado",
+      "none": "-"
+    },
+    "assignee": {
+      "label": "Agente asignado",
+      "none": "-"
+    }
+  },
+  "share": {
+    "info": "Díganos dónde en JIRA desea colocar este ticket. Cuando envíe esta actualización de ticket, la enviaremos a JIRA.",
+    "or": "O BIEN",
+    "project": {
+      "label": "¿En qué proyecto desea colocar este ticket?",
+      "prompt": "Elegir"
+    },
+    "story_type": {
+      "label": "¿Qué tipo de historia debería ser?",
+      "prompt": "Elegir"
+    },
+    "story_id": {
+      "label": "Asociar este ticket con una story ID específica"
+    }
+  },
+  "unshared": {
+    "isUnshared": "Este ticket no está actualmente asociado con un problema de JIRA.",
+    "selectToShare": "Seleccione el acuerdo de JIRA en el menú \"Compartir\"."
+  }
+}
