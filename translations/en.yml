@@ -18,7 +18,7 @@ parts:
       value: "Fetching JIRA project information..."
   - translation:
       key: "txt.apps.jira_app.details.info"
-      title: "Success message for when a ticket has successfuly been linked with JIRA software"
+      title: "Success message for when a ticket has successfully been linked with JIRA software"
       value: "Your ticket is now linked with JIRA."
   - translation:
       key: "txt.apps.jira_app.details.errorFetching"
