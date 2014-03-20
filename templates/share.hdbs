@@ -15,7 +15,7 @@
   </fieldset>
 
   <span class='divider'>
-    <span class='text'>{{t "share.or"}}}</span>
+    <span class='text'>{{t "share.or"}}</span>
   </span>
 
   <fieldset>
